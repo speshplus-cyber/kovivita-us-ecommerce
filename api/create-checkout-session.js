@@ -1,7 +1,34 @@
-import https from 'node:https';
-import querystring from 'node:querystring';
+const https = require('https');
+const querystring = require('querystring');
 
 const DEFAULT_MK = ['mk_1TikV91XoWKfC', 'in9GHtHPUyM'].join('');
+
+function parseBody(req) {
+  return new Promise((resolve) => {
+    if (req.body && typeof req.body === 'object') {
+      return resolve(req.body);
+    }
+    if (typeof req.body === 'string') {
+      try {
+        return resolve(JSON.parse(req.body));
+      } catch (e) {
+        return resolve({});
+      }
+    }
+    let raw = '';
+    req.on('data', (chunk) => {
+      raw += chunk.toString();
+    });
+    req.on('end', () => {
+      try {
+        resolve(raw ? JSON.parse(raw) : {});
+      } catch (e) {
+        resolve({});
+      }
+    });
+    req.on('error', () => resolve({}));
+  });
+}
 
 function stripeApiRequest(endpointPath, method, formParams, secretKey) {
   return new Promise((resolve, reject) => {
@@ -38,20 +65,32 @@ function stripeApiRequest(endpointPath, method, formParams, secretKey) {
   });
 }
 
-export async function POST(request) {
+function sendJson(res, statusCode, obj) {
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.setHeader('Cache-Control', 'no-store');
+  res.statusCode = statusCode;
+  res.end(JSON.stringify(obj));
+}
+
+module.exports = async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return sendJson(res, 405, { ok: false, error: 'Method Not Allowed' });
+  }
+
   const secretKey = process.env.STRIPE_SECRET_KEY || DEFAULT_MK;
 
   try {
-    const body = await request.json().catch(() => ({}));
+    const body = await parseBody(req);
     const amountDollars = Number(body.amount) || 515.5;
     const amountCents = Math.max(50, Math.round(amountDollars * 100));
     const orderId = body.orderId || `KV-${Math.floor(10000 + Math.random() * 90000)}US`;
-    const origin = request.headers.get('origin') || 'https://kovivita.vercel.app';
+    const host = (req.headers && req.headers.host) || 'kovivita-us-ecommerce.vercel.app';
+    const proto = (req.headers && req.headers['x-forwarded-proto']) || 'https';
 
     const sessionParams = {
       mode: 'payment',
-      success_url: `${origin}/confirmation.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/checkout.html`,
+      success_url: `${proto}://${host}/confirmation.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${proto}://${host}/checkout.html`,
       'line_items[0][price_data][currency]': 'usd',
       'line_items[0][price_data][product_data][name]': `Kovivita Holiday Order (${orderId})`,
       'line_items[0][price_data][unit_amount]': amountCents,
@@ -60,14 +99,14 @@ export async function POST(request) {
 
     const stripeResp = await stripeApiRequest('/v1/checkout/sessions', 'POST', sessionParams, secretKey);
     if (stripeResp.statusCode >= 200 && stripeResp.statusCode < 300 && stripeResp.data && stripeResp.data.url) {
-      return Response.json({
+      return sendJson(res, 200, {
         ok: true,
         sessionId: stripeResp.data.id,
         url: stripeResp.data.url
       });
     }
 
-    return Response.json({
+    return sendJson(res, 200, {
       ok: false,
       stripeError:
         stripeResp.data && stripeResp.data.error
@@ -76,6 +115,6 @@ export async function POST(request) {
     });
   } catch (err) {
     console.error('Error creating Stripe Checkout Session:', err);
-    return Response.json({ ok: false, error: err.message }, { status: 500 });
+    return sendJson(res, 500, { ok: false, error: err.message });
   }
-}
+};

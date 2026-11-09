@@ -3,24 +3,21 @@ const DEFAULT_PK = [
 ].join('');
 const DEFAULT_MK = ['mk_1TikV91XoWKfC', 'in9GHtHPUyM'].join('');
 
-export async function GET() {
+module.exports = async function handler(req, res) {
   const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY || DEFAULT_PK;
   const secretKey = process.env.STRIPE_SECRET_KEY || DEFAULT_MK;
 
-  return Response.json(
-    {
-      ok: true,
-      publishableKey,
-      mode: publishableKey.startsWith('pk_live_') ? 'live' : 'test',
-      accountConnected: Boolean(secretKey && publishableKey),
-      secretKeyConfigured: Boolean(secretKey),
-      secretKeyPrefix: secretKey ? `${secretKey.slice(0, 10)}...` : null
-    },
-    {
-      status: 200,
-      headers: {
-        'Cache-Control': 'no-store'
-      }
-    }
-  );
-}
+  const payload = JSON.stringify({
+    ok: true,
+    publishableKey,
+    mode: publishableKey.startsWith('pk_live_') ? 'live' : 'test',
+    accountConnected: Boolean(secretKey && publishableKey),
+    secretKeyConfigured: Boolean(secretKey),
+    secretKeyPrefix: secretKey ? `${secretKey.slice(0, 10)}...` : null
+  });
+
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.setHeader('Cache-Control', 'no-store');
+  res.statusCode = 200;
+  res.end(payload);
+};
