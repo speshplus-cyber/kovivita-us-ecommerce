@@ -186,30 +186,19 @@ const KOVIVITA_CATALOG = [
 ];
 
 const DEFAULT_STATE = {
-  cart: [
-    {
-      productId: 'ultra-mountain-pine',
-      size: '7.5ft',
-      qty: 1
-    },
-    {
-      productId: 'glass-bauble-set',
-      size: '16pc',
-      qty: 1
-    }
-  ],
-  wishlist: ['arbor-vitae-fir', 'snowy-woodland-fir'],
+  cart: [],
+  wishlist: [],
   whiteGloveTier: 'concierge', // 'standard' ($0), 'concierge' ($89), 'master' ($149)
   deliveryWindow: 'pre-thanksgiving', // 'pre-thanksgiving' (Nov 18–22), 'express' (2-3 Business Days)
-  promoCode: 'KOVIVITA-US-LAUNCH',
-  promoDiscount: 30,
+  promoCode: '',
+  promoDiscount: 0,
   customer: {
-    name: 'Eleanor Vance',
-    email: 'eleanor.vance@greenwichliving.com',
+    name: '',
+    email: 'client@kovivita.com',
     address: '742 Evergreen Terrace',
     cityStateZip: 'Greenwich, CT 06830',
     phone: '(203) 555-0192',
-    cardLast4: '9084'
+    cardLast4: ''
   },
   lastOrder: null
 };
@@ -253,12 +242,15 @@ const DELIVERY_WINDOWS = {
   }
 };
 
-// State Management
+// State Management (v2: starts with an empty cart for all new visitors)
+const STATE_STORAGE_KEY = 'kovivita_state_v2';
+
 function getState() {
   try {
-    const raw = localStorage.getItem('kovivita_state_v1');
+    localStorage.removeItem('kovivita_state_v1');
+    const raw = localStorage.getItem(STATE_STORAGE_KEY);
     if (!raw) {
-      localStorage.setItem('kovivita_state_v1', JSON.stringify(DEFAULT_STATE));
+      localStorage.setItem(STATE_STORAGE_KEY, JSON.stringify(DEFAULT_STATE));
       return JSON.parse(JSON.stringify(DEFAULT_STATE));
     }
     const parsed = JSON.parse(raw);
@@ -270,7 +262,7 @@ function getState() {
 
 function saveState(state) {
   try {
-    localStorage.setItem('kovivita_state_v1', JSON.stringify(state));
+    localStorage.setItem(STATE_STORAGE_KEY, JSON.stringify(state));
   } catch (e) {}
   updateGlobalBadges();
 }
@@ -1780,34 +1772,48 @@ function initCheckoutPage() {
 
   // Populate Right Column Items & Totals
   const itemsContainer = document.getElementById('checkout-items-list');
-  if (itemsContainer && totals.detailedItems.length > 0) {
-    itemsContainer.innerHTML = totals.detailedItems.map(item => {
-      const p = item.product;
-      const isTree = p.category.includes('all');
-      return `
-        <div class="py-4 border-b border-border-hairline flex gap-4 items-start">
-          <div class="relative w-20 h-24 bg-surface-subtle rounded border border-border-hairline overflow-hidden flex-shrink-0">
-            <img class="w-full h-full object-cover" src="${p.cartImage || p.image}" alt="${p.shortName}" />
-            <span class="absolute top-1 left-1 ${isTree ? 'bg-secondary' : 'bg-primary'} text-white text-[9px] font-bold px-1.5 py-0.5 rounded">${item.size}</span>
-          </div>
-          <div class="flex-grow">
-            <div class="flex justify-between items-start gap-2">
-              <div>
-                <h3 class="font-headline-sm text-base text-on-surface font-semibold leading-snug">${p.shortName}</h3>
-                <p class="font-body-sm text-xs text-text-muted mt-0.5">${p.subtitle}</p>
-              </div>
-              <span class="font-label-md font-bold text-on-surface text-base">${formatUSD(item.lineTotal)}</span>
-            </div>
-            <div class="mt-2 flex items-center justify-between gap-2">
-              <span class="inline-flex items-center text-[10px] font-label-caps bg-pine-frost text-pine-light px-2 py-0.5 rounded font-semibold">
-                ${p.peRatio}
-              </span>
-              <span class="text-xs text-text-muted">Qty: ${item.qty}</span>
-            </div>
+  if (itemsContainer) {
+    if (totals.detailedItems.length === 0) {
+      itemsContainer.innerHTML = `
+        <div class="py-8 text-center space-y-3 border-b border-border-hairline">
+          <span class="material-symbols-outlined text-3xl text-text-muted">shopping_bag</span>
+          <p class="font-headline-sm text-base text-on-surface font-semibold">Your Cart is Empty</p>
+          <p class="text-xs text-text-muted">Add a Christmas tree or ornament set to your cart to proceed with checkout.</p>
+          <div class="pt-1 flex justify-center gap-2">
+            <a href="index.html#bestsellers" class="px-3.5 py-2 bg-primary text-white text-xs font-semibold rounded hover:bg-crimson-deep">Shop Trees</a>
+            <a href="quiz.html" class="px-3.5 py-2 border border-border-hairline text-on-surface text-xs font-semibold rounded hover:bg-surface-subtle">3D Customizer</a>
           </div>
         </div>
       `;
-    }).join('');
+    } else {
+      itemsContainer.innerHTML = totals.detailedItems.map(item => {
+        const p = item.product;
+        const isTree = p.category.includes('all');
+        return `
+          <div class="py-4 border-b border-border-hairline flex gap-4 items-start">
+            <div class="relative w-20 h-24 bg-surface-subtle rounded border border-border-hairline overflow-hidden flex-shrink-0">
+              <img class="w-full h-full object-cover" src="${p.cartImage || p.image}" alt="${p.shortName}" />
+              <span class="absolute top-1 left-1 ${isTree ? 'bg-secondary' : 'bg-primary'} text-white text-[9px] font-bold px-1.5 py-0.5 rounded">${item.size}</span>
+            </div>
+            <div class="flex-grow">
+              <div class="flex justify-between items-start gap-2">
+                <div>
+                  <h3 class="font-headline-sm text-base text-on-surface font-semibold leading-snug">${p.shortName}</h3>
+                  <p class="font-body-sm text-xs text-text-muted mt-0.5">${p.subtitle}</p>
+                </div>
+                <span class="font-label-md font-bold text-on-surface text-base">${formatUSD(item.lineTotal)}</span>
+              </div>
+              <div class="mt-2 flex items-center justify-between gap-2">
+                <span class="inline-flex items-center text-[10px] font-label-caps bg-pine-frost text-pine-light px-2 py-0.5 rounded font-semibold">
+                  ${p.peRatio}
+                </span>
+                <span class="text-xs text-text-muted">Qty: ${item.qty}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
   }
 
   const countPill = document.getElementById('checkout-item-count');
@@ -1843,10 +1849,19 @@ function initCheckoutPage() {
 
 window.completeCheckoutOrder = async function() {
   const state = getState();
+  const initialTotals = calculateTotals(state);
   const cardholderInput = document.getElementById('cardholder-name');
   const zipInput = document.getElementById('postal-code');
   const errBox = document.getElementById('stripe-card-errors');
   if (errBox) errBox.classList.add('hidden');
+
+  if (initialTotals.detailedItems.length === 0 || initialTotals.total <= 0) {
+    if (errBox) {
+      errBox.innerHTML = `<span class="material-symbols-outlined text-sm shrink-0">error</span> <span>Your shopping cart is empty. Please add a Christmas tree or ornament set to your cart before paying.</span>`;
+      errBox.classList.remove('hidden');
+    }
+    return;
+  }
 
   const cardholderName = cardholderInput ? cardholderInput.value.trim() : '';
   if (!cardholderName) {
@@ -2026,6 +2041,7 @@ window.completeCheckoutOrder = async function() {
       totals,
       customer: { ...state.customer }
     };
+    state.cart = [];
     saveState(state);
 
     window.location.href = `confirmation.html?payment_intent=${encodeURIComponent(finalPaymentIntentId)}`;
