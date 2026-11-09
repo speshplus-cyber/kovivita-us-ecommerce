@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KOVIVITA by Christmas Tree World | Luxury Pre-Lit &amp; Hyper-Realistic Christmas Trees</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary": "#ffffff",
+            "on-secondary-fixed-variant": "#274e3d",
+            "border-hairline": "#E4E4E7",
+            "on-secondary-container": "#436b58",
+            "on-tertiary-fixed-variant": "#574500",
+            "outline-variant": "#e0bebe",
+            "pine-light": "#2D6A4F",
+            "surface-container-high": "#eae7eb",
+            "inverse-on-surface": "#f3f0f4",
+            "inverse-primary": "#ffb3b4",
+            "crimson-bright": "#C41E3A",
+            "canvas-cream": "#FAFAF9",
+            "on-primary-fixed": "#40000b",
+            "outline": "#8d7070",
+            "surface-bright": "#fbf8fc",
+            "primary-fixed-dim": "#ffb3b4",
+            "surface-variant": "#e4e1e6",
+            "on-surface-variant": "#594141",
+            "tertiary-fixed": "#ffe088",
+            "on-error-container": "#93000a",
+            "secondary-fixed-dim": "#a5d0b9",
+            "on-error": "#ffffff",
+            "surface-container-highest": "#e4e1e6",
+            "tertiary-fixed-dim": "#e9c349",
+            "gold-shimmer": "#FDF8E7",
+            "on-secondary": "#ffffff",
+            "inverse-surface": "#303033",
+            "on-tertiary-container": "#4f3e00",
+            "on-secondary-fixed": "#002114",
+            "crimson-deep": "#801224",
+            "on-primary-fixed-variant": "#900926",
+            "error": "#ba1a1a",
+            "primary": "#79001d",
+            "on-background": "#1b1b1e",
+            "on-tertiary-fixed": "#241a00",
+            "on-tertiary": "#ffffff",
+            "on-primary-container": "#ffaeb0",
+            "text-muted": "#71717A",
+            "on-surface": "#1b1b1e",
+            "background": "#fbf8fc",
+            "secondary-container": "#beead1",
+            "tertiary": "#735c00",
+            "surface-tint": "#b1283b",
+            "surface-container-lowest": "#ffffff",
+            "surface-subtle": "#F5F5F4",
+            "error-container": "#ffdad6",
+            "surface": "#fbf8fc",
+            "primary-container": "#9e182f",
+            "tertiary-container": "#cca830",
+            "surface-container-low": "#f6f2f7",
+            "surface-dim": "#dcd9dd",
+            "secondary": "#3f6653",
+            "secondary-fixed": "#c1ecd4",
+            "primary-fixed": "#ffdada",
+            "surface-container": "#f0edf1",
+            "pine-frost": "#EAF2ED",
+            "gold-light": "#E5C158"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "space-2xl": "4rem",
+            "space-xl": "2.5rem",
+            "margin": "2.5rem",
+            "gutter": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "gutter-sm": "1rem",
+            "space-xs": "0.25rem",
+            "margin-mobile": "1.25rem"
+          },
+          "fontFamily": {
+            "label-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-caps": ["Plus Jakarta Sans"],
+            "display-hero-mobile": ["Playfair Display"],
+            "headline-md": ["Playfair Display"],
+            "headline-sm": ["Playfair Display"],
+            "display-hero": ["Playfair Display"],
+            "headline-lg": ["Playfair Display"],
+            "price-lg": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Playfair Display"],
+            "body-md": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.12em", "fontWeight": "700" }],
+            "display-hero-mobile": ["38px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-md": ["26px", { "lineHeight": "34px", "fontWeight": "500" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+            "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "price-lg": ["24px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "headline-lg-mobile": ["28px", { "lineHeight": "34px", "fontWeight": "600" }],
+            "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+    }
+    .diamond-sep {
+      color: #E5C158;
+      font-size: 9px;
+      vertical-align: middle;
+      margin: 0 10px;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      height: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #79001d;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-canvas-cream text-on-surface font-body-md antialiased selection:bg-primary selection:text-white">
+<!-- 1. Top Announcement Strip (Forest Pine Heritage) -->
+<div class="bg-secondary text-white py-2 px-4 text-center border-b border-border-hairline sticky top-0 z-50">
+<div class="max-w-[1440px] mx-auto flex items-center justify-between text-xs tracking-wider">
+<div class="hidden lg:flex items-center space-x-2 font-label-caps text-label-caps text-gold-light">
+<span>EST. NEW YORK 1982</span>
+<span class="diamond-sep">♦</span>
+<span>AMERICAN BOTANICAL CRAFTSMANSHIP</span>
+</div>
+<div class="flex-1 text-center font-label-md text-label-md flex items-center justify-center space-x-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-primary-container text-white text-[11px] font-bold tracking-wide mr-2">US LAUNCH</span>
+<span>Enjoy Free Continental US White-Glove Shipping on Orders $75+</span>
+<span class="diamond-sep">♦</span>
+<span class="font-semibold text-gold-shimmer">10-Year Master Foliage Guarantee</span>
+</div>
+<div class="hidden sm:flex items-center space-x-4 font-label-caps text-label-caps">
+<div class="flex items-center space-x-1 cursor-pointer hover:text-gold-light transition-colors">
+<span class="text-xs">🇺🇸</span>
+<span>USD ($)</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</div>
+<span class="diamond-sep">♦</span>
+<a class="hover:text-gold-light transition-colors" href="#support">Toll-Free 1-800-KOVIVITA</a>
+</div>
+</div>
+</div>
+<!-- 2. Navigation Header (TopNavBar Anchor Execution) -->
+<header class="bg-canvas-cream/90 backdrop-blur-md sticky top-[37px] z-40 border-b border-border-hairline shadow-sm transition-all duration-200">
+<div class="w-full max-w-[1440px] mx-auto px-6 md:px-10 flex items-center justify-between h-20">
+<!-- Brand Logo -->
+<div class="flex items-center space-x-4">
+<a class="flex flex-col group" href="index.html">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary text-2xl group-hover:rotate-12 transition-transform duration-300">forest</span>
+<span class="font-headline-md text-headline-md tracking-wider font-semibold text-primary">KOVIVITA</span>
+</div>
+<span class="font-label-caps text-[9px] tracking-[0.25em] text-text-muted uppercase font-bold -mt-1 pl-7">BY CHRISTMAS TREE WORLD • EST. NEW YORK</span>
+</a>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden xl:flex items-center space-x-7">
+<a class="text-primary border-b-2 border-primary pb-1 font-label-md text-label-md" data-category-trigger="all" href="#bestsellers">All Trees</a>
+<a class="text-on-surface font-label-md text-label-md hover:text-primary transition-colors" data-category-trigger="prelit" href="#bestsellers">Pre-Lit Trees</a>
+<a class="text-on-surface font-label-md text-label-md hover:text-primary transition-colors" data-category-trigger="snowy" href="#bestsellers">Flocked &amp; Snowy</a>
+<a class="text-on-surface font-label-md text-label-md hover:text-primary transition-colors" data-category-trigger="realistic" href="#bestsellers">Realistic Pines</a>
+<a class="text-on-surface font-label-md text-label-md hover:text-primary transition-colors" data-category-trigger="decorations" href="#bestsellers">Lights &amp; Wreaths</a>
+<a class="flex items-center text-primary font-label-md text-label-md bg-gold-shimmer px-3 py-1.5 rounded border border-gold-light/40 hover:bg-gold-light/20 transition-all" href="quiz.html">
+<span class="material-symbols-outlined text-sm mr-1 text-tertiary">arrow_back_ios_new</span>
+          Tree Finder Quiz
+        </a>
+</nav>
+<!-- Trailing Icon Actions -->
+<div class="flex items-center space-x-5">
+<div class="hidden md:flex items-center relative">
+<input class="w-48 lg:w-60 pl-9 pr-3 py-1.5 text-xs bg-white rounded border border-border-hairline focus:outline-none focus:border-primary text-on-surface placeholder-text-muted font-body-sm shadow-inner transition-all focus:w-64" id="catalog-search-input" placeholder="Search trees, lights, sizes..." type="text"/>
+<span class="material-symbols-outlined absolute left-2.5 text-text-muted text-lg pointer-events-none">search</span>
+</div>
+<button class="text-on-surface hover:text-crimson-deep transition-colors relative" onclick="openWishlistModal()" title="Wishlist" type="button">
+<span class="material-symbols-outlined text-2xl">favorite</span>
+<span class="absolute -top-1 -right-1 w-4 h-4 bg-primary text-white text-[10px] font-bold rounded-full flex items-center justify-center" data-wishlist-count="">2</span>
+</button>
+<button class="text-on-surface hover:text-crimson-deep transition-colors flex items-center space-x-1" onclick="openAccountModal()" title="Account" type="button">
+<span class="material-symbols-outlined text-2xl">account_circle</span>
+<span class="hidden lg:inline font-label-md text-label-md">Account</span>
+</button>
+<a class="flex items-center space-x-2 bg-primary-container text-white px-4 py-2 rounded shadow-sm hover:bg-crimson-deep transition-all duration-200" href="cart.html">
+<span class="material-symbols-outlined text-xl">shopping_bag</span>
+<span class="font-label-md text-label-md" data-cart-count="">Cart (2)</span>
+</a>
+</div>
+</div>
+</header>
+<!-- 3. Dramatic Hero Banner -->
+<section class="relative bg-surface-subtle overflow-hidden border-b border-border-hairline">
+<div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[640px] items-stretch">
+<!-- Text & Brand Value Proposition -->
+<div class="lg:col-span-6 px-6 md:px-14 py-16 flex flex-col justify-center z-10">
+<div class="inline-flex items-center space-x-2 bg-white/90 backdrop-blur-sm border border-border-hairline rounded-full px-3.5 py-1 mb-6 shadow-sm self-start">
+<span class="w-2 h-2 rounded-full bg-crimson-bright animate-ping"></span>
+<span class="font-label-caps text-label-caps text-primary tracking-wider uppercase font-bold">Official 2025 Reserve</span>
+<span class="text-text-muted font-body-sm text-xs">|</span>
+<span class="font-label-caps text-label-caps text-secondary font-semibold">Biltmore Estate &amp; Rockefeller Supplier</span>
+</div>
+<h1 class="font-display-hero text-headline-lg lg:text-display-hero text-on-surface leading-tight mb-5">
+          America’s Most Revered Christmas Trees, <span class="italic text-primary font-normal">Crafted for Discerning US Homes.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-text-muted mb-8 max-w-xl">
+          Handcrafted hyper-realistic pine needles, custom warm-glow LED engineering, and a legendary 10-Year Foliage Guarantee trusted by historic American estates and over 250,000 US households.
+        </p>
+<!-- CTA Cluster -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 mb-10">
+<a class="bg-primary-container hover:bg-crimson-deep text-white px-7 py-4 rounded font-label-md text-label-md text-center transition-all duration-200 transform hover:-translate-y-0.5 shadow-md flex items-center justify-center space-x-2" href="#bestsellers">
+<span>Shop The 2025 US Collection</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<a class="border border-on-surface hover:bg-on-surface hover:text-canvas-cream text-on-surface px-6 py-4 rounded font-label-md text-label-md text-center transition-all duration-200 flex items-center justify-center space-x-2" href="quiz.html">
+<span class="material-symbols-outlined text-base">quiz</span>
+<span>Find Your Perfect Tree (1-Min Quiz)</span>
+</a>
+</div>
+<!-- Trust Pillars Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-border-hairline">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-secondary text-xl">verified</span>
+<span class="font-label-caps text-[11px] leading-tight text-on-surface font-semibold">10-Year Foliage Guarantee</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-secondary text-xl">local_shipping</span>
+<span class="font-label-caps text-[11px] leading-tight text-on-surface font-semibold">Free US Delivery $75+</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-secondary text-xl">lightbulb</span>
+<span class="font-label-caps text-[11px] leading-tight text-on-surface font-semibold">Pre-Strung Micro-LEDs</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-secondary text-xl">park</span>
+<span class="font-label-caps text-[11px] leading-tight text-on-surface font-semibold">1 Tree Planted Per Order</span>
+</div>
+</div>
+</div>
+<!-- Hero Visual Backdrop -->
+<div class="lg:col-span-6 relative min-h-[380px] lg:min-h-full">
+<img alt="Kovivita American Heritage Luxury Christmas Living Room" class="absolute inset-0 w-full h-full object-cover object-center" src="images/hero-banner.png"/>
+<div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-canvas-cream via-transparent to-transparent"></div>
+<div class="absolute bottom-6 right-6 bg-white/95 backdrop-blur-md p-4 rounded shadow-lg border border-border-hairline max-w-xs hidden sm:block">
+<div class="flex items-center space-x-3">
+<div class="w-12 h-12 bg-primary/10 rounded flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">trophy</span>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-primary uppercase font-bold">Voted #1 Best Tree</p>
+<p class="font-body-sm text-xs text-text-muted">Architectural Digest &amp; NYT Wirecutter 2024</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Visual Category Explorer (Bento Grid Style) -->
+<section class="max-w-[1440px] mx-auto px-6 md:px-10 py-16">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+<div>
+<p class="font-label-caps text-label-caps text-primary uppercase tracking-widest font-bold mb-1">Explore Botanical Collections</p>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-medium">Bespoke Tree Architecture For Every Space</h2>
+</div>
+<a class="text-secondary hover:text-primary font-label-md text-label-md flex items-center space-x-1 mt-4 md:mt-0 transition-colors" href="#bestsellers">
+<span>View Full Catalog Index</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Category Grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+<!-- Card 1 -->
+<a class="group bg-white rounded border border-border-hairline p-4 flex flex-col items-center text-center hover:shadow-md transition-all duration-200" data-category-trigger="prelit" href="#bestsellers">
+<div class="w-full aspect-square rounded overflow-hidden bg-surface-subtle mb-3">
+<img alt="Pre-Lit Ultra Pines" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="images/cat-prelit-pines.png"/>
+</div>
+<span class="font-headline-sm text-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Pre-Lit Ultra Pines</span>
+<span class="font-label-caps text-[11px] text-text-muted mt-1">From $199 USD</span>
+</a>
+<!-- Card 2 -->
+<a class="group bg-white rounded border border-border-hairline p-4 flex flex-col items-center text-center hover:shadow-md transition-all duration-200" data-category-trigger="realistic" href="#bestsellers">
+<div class="w-full aspect-square rounded overflow-hidden bg-surface-subtle mb-3">
+<img alt="Hyper-Realistic Fraser Fir" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="images/arbor-ultima.png"/>
+</div>
+<span class="font-headline-sm text-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Hyper-Realistic Fir</span>
+<span class="font-label-caps text-[11px] text-text-muted mt-1">From $249 USD</span>
+</a>
+<!-- Card 3 -->
+<a class="group bg-white rounded border border-border-hairline p-4 flex flex-col items-center text-center hover:shadow-md transition-all duration-200" data-category-trigger="snowy" href="#bestsellers">
+<div class="w-full aspect-square rounded overflow-hidden bg-surface-subtle mb-3">
+<img alt="Winter Flocked &amp; Snowy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="images/snowy-woodland-fir.png"/>
+</div>
+<span class="font-headline-sm text-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Flocked &amp; Snowy</span>
+<span class="font-label-caps text-[11px] text-text-muted mt-1">From $229 USD</span>
+</a>
+<!-- Card 4 -->
+<a class="group bg-white rounded border border-border-hairline p-4 flex flex-col items-center text-center hover:shadow-md transition-all duration-200" data-category-trigger="slim" href="#bestsellers">
+<div class="w-full aspect-square rounded overflow-hidden bg-surface-subtle mb-3">
+<img alt="Apartment &amp; Slim Trees" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="images/slimline-windsor-fir.png"/>
+</div>
+<span class="font-headline-sm text-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Slim &amp; Pencil Trees</span>
+<span class="font-label-caps text-[11px] text-text-muted mt-1">From $149 USD</span>
+</a>
+<!-- Card 5 -->
+<a class="group bg-white rounded border border-border-hairline p-4 flex flex-col items-center text-center hover:shadow-md transition-all duration-200" data-category-trigger="prelit" href="#bestsellers">
+<div class="w-full aspect-square rounded overflow-hidden bg-surface-subtle mb-3">
+<img alt="Twinkle Lights &amp; Cluster Strings" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="images/cat-cluster-lights.png"/>
+</div>
+<span class="font-headline-sm text-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Cluster Lights</span>
+<span class="font-label-caps text-[11px] text-text-muted mt-1">From $39 USD</span>
+</a>
+<!-- Card 6 -->
+<a class="group bg-white rounded border border-border-hairline p-4 flex flex-col items-center text-center hover:shadow-md transition-all duration-200" href="#bestsellers" onclick="openQuickView('glass-bauble-set', '16pc')">
+<div class="w-full aspect-square rounded overflow-hidden bg-surface-subtle mb-3">
+<img alt="Handcrafted Baubles &amp; Sets" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="images/glass-bauble-set.png"/>
+</div>
+<span class="font-headline-sm text-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Bauble Sets</span>
+<span class="font-label-caps text-[11px] text-text-muted mt-1">From $29 USD</span>
+</a>
+</div>
+</section>
+<!-- 5. Featured Bestsellers (Interactive Tree Showroom) -->
+<section class="bg-surface-subtle py-20 border-y border-border-hairline" id="bestsellers">
+<div class="max-w-[1440px] mx-auto px-6 md:px-10">
+<!-- Section Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+<div>
+<span class="font-label-caps text-label-caps text-primary uppercase font-bold tracking-widest">Handcrafted In The USA • Ready To Ship</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-medium mt-1">The Signature Holiday Collection</h2>
+</div>
+<!-- Filter Pill Cluster -->
+<div class="flex items-center space-x-2 overflow-x-auto pb-2 md:pb-0 mt-4 md:mt-0 custom-scroll">
+<button class="bg-secondary text-white px-4 py-2 rounded text-xs font-semibold whitespace-nowrap shadow-sm" data-filter-btn="all" type="button">All Trees</button>
+<button class="bg-white hover:bg-canvas-cream text-on-surface border border-border-hairline px-4 py-2 rounded text-xs font-semibold whitespace-nowrap transition-colors" data-filter-btn="prelit" type="button">Pre-Lit Favorites</button>
+<button class="bg-white hover:bg-canvas-cream text-on-surface border border-border-hairline px-4 py-2 rounded text-xs font-semibold whitespace-nowrap transition-colors" data-filter-btn="realistic" type="button">Hyper-Realistic</button>
+<button class="bg-white hover:bg-canvas-cream text-on-surface border border-border-hairline px-4 py-2 rounded text-xs font-semibold whitespace-nowrap transition-colors" data-filter-btn="snowy" type="button">Snowy &amp; Frosted</button>
+<button class="bg-white hover:bg-canvas-cream text-on-surface border border-border-hairline px-4 py-2 rounded text-xs font-semibold whitespace-nowrap transition-colors" data-filter-btn="grand" type="button">Grand 9ft-12ft+</button>
+</div>
+</div>
+<!-- Luxury Retail Product Cards Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Product Card 1: Arbor Vitae Fir -->
+<div class="bg-white rounded border border-border-hairline overflow-hidden flex flex-col justify-between group hover:shadow-lg transition-all duration-300" data-product-card="arbor-vitae-fir" data-selected-size="6.0ft">
+<div class="p-4 relative">
+<div class="absolute top-6 left-6 z-10 flex flex-col space-y-1">
+<span class="bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded tracking-wide uppercase">SAVE 31%</span>
+<span class="bg-secondary text-white text-[9px] font-bold px-1.5 py-0.5 rounded tracking-wide uppercase">PRE-LIT LED</span>
+</div>
+<button class="absolute top-6 right-6 z-10 text-on-surface/50 hover:text-primary bg-white/80 backdrop-blur-sm p-1.5 rounded-full shadow-sm" data-wishlist-btn="arbor-vitae-fir" onclick="toggleWishlist('arbor-vitae-fir', this)" type="button">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+<!-- Image Frame -->
+<div class="w-full aspect-[4/5] rounded overflow-hidden bg-canvas-cream relative cursor-pointer" onclick="openQuickView('arbor-vitae-fir')">
+<img alt="The Arbor Vitae Fir Pre-Lit Tree" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-0" src="images/arbor-vitae-fir-prelit.png"/>
+<img alt="The Arbor Vitae Fir Natural Foliage Detail" class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" src="images/arbor-vitae-fir-detail.png"/>
+</div>
+<!-- Guarantee micro-badge -->
+<div class="flex items-center space-x-1.5 mt-3 text-secondary font-label-caps text-[10px]">
+<span class="material-symbols-outlined text-xs">shield</span>
+<span>10-Year Foliage Guarantee</span>
+</div>
+<h3 class="font-headline-sm text-base font-semibold text-on-surface mt-1 group-hover:text-primary transition-colors cursor-pointer" onclick="openQuickView('arbor-vitae-fir')">The Arbor Vitae Fir (Pre-Lit Warm White)</h3>
+<!-- Rating -->
+<div class="flex items-center space-x-1.5 mt-1.5">
+<div class="flex text-amber-500 text-xs">★★★★★</div>
+<span class="font-body-sm text-xs text-text-muted">4.9 (612 reviews)</span>
+</div>
+<!-- Size Selector Pills -->
+<div class="mt-4">
+<span class="text-[11px] font-semibold text-text-muted uppercase tracking-wider block mb-1.5">Select Height:</span>
+<div class="flex space-x-1.5">
+<button class="px-2 py-1 text-xs rounded border border-secondary bg-secondary text-white font-medium" data-size-btn="6.0ft" type="button">6.0ft</button>
+<button class="px-2 py-1 text-xs rounded border border-border-hairline text-on-surface hover:border-secondary transition-colors" data-size-btn="7.5ft" type="button">7.5ft</button>
+<button class="px-2 py-1 text-xs rounded border border-border-hairline text-on-surface hover:border-secondary transition-colors" data-size-btn="8.0ft" type="button">8.0ft</button>
+<button class="px-2 py-1 text-xs rounded border border-border-hairline text-on-surface hover:border-secondary transition-colors" data-size-btn="9.0ft" type="button">9.0ft</button>
+</div>
+</div>
+<!-- Price Stack -->
+<div class="mt-4 pt-3 border-t border-border-hairline flex items-baseline justify-between">
+<div>
+<span class="font-price-lg text-xl font-bold text-primary" data-card-price="">$289.00</span>
+<span class="text-xs text-text-muted line-through ml-2" data-card-orig-price="">$420.00</span>
+</div>
+<span class="text-[11px] text-text-muted" data-card-affirm="">Or $24/mo via Affirm</span>
+</div>
+</div>
+<!-- Bottom Card CTAs -->
+<div class="p-4 pt-0 grid grid-cols-2 gap-2">
+<button class="bg-primary hover:bg-crimson-deep text-white py-2 text-xs font-semibold rounded flex items-center justify-center space-x-1 transition-colors" data-add-to-cart="" type="button">
+<span class="material-symbols-outlined text-sm">shopping_cart</span>
+<span>Add to Cart</span>
+</button>
+<button class="border border-on-surface text-on-surface hover:bg-on-surface hover:text-white py-2 text-xs font-semibold rounded transition-colors" data-quick-view="" type="button">
+              Quick View
+            </button>
+</div>
+</div>
+<!-- Product Card 2: Ultra Mountain Pine -->
+<div class="bg-white rounded border border-border-hairline overflow-hidden flex flex-col justify-between group hover:shadow-lg transition-all duration-300" data-product-card="ultra-mountain-pine" data-selected-size="7.5ft">
+<div class="p-4 relative">
+<div class="absolute top-6 left-6 z-10 flex flex-col space-y-1">
+<span class="bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded tracking-wide uppercase">SAVE 30%</span>
+<span class="bg-amber-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded tracking-wide uppercase">EDITOR'S PICK</span>
+</div>
+<button class="absolute top-6 right-6 z-10 text-on-surface/50 hover:text-primary bg-white/80 backdrop-blur-sm p-1.5 rounded-full shadow-sm" data-wishlist-btn="ultra-mountain-pine" onclick="toggleWishlist('ultra-mountain-pine', this)" type="button">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+<!-- Image Frame -->
+<div class="w-full aspect-[4/5] rounded overflow-hidden bg-canvas-cream relative cursor-pointer" onclick="openQuickView('ultra-mountain-pine', '7.5ft')">
+<img alt="The Ultra Mountain Pine Full View" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="images/ultra-mountain-pine.png"/>
+</div>
+<div class="flex items-center space-x-1.5 mt-3 text-secondary font-label-caps text-[10px]">
+<span class="material-symbols-outlined text-xs">shield</span>
+<span>10-Year Foliage Guarantee</span>
+</div>
+<h3 class="font-headline-sm text-base font-semibold text-on-surface mt-1 group-hover:text-primary transition-colors cursor-pointer" onclick="openQuickView('ultra-mountain-pine', '7.5ft')">The Ultra Mountain Pine (Real-Needle PE)</h3>
+<div class="flex items-center space-x-1.5 mt-1.5">
+<div class="flex text-amber-500 text-xs">★★★★★</div>
+<span class="font-body-sm text-xs text-text-muted">5.0 (399 reviews)</span>
+</div>
+<div class="mt-4">
+<span class="text-[11px] font-semibold text-text-muted uppercase tracking-wider block mb-1.5">Select Height:</span>
+<div class="flex space-x-1.5">
+<button class="px-2 py-1 text-xs rounded border border-border-hairline text-on-surface hover:border-secondary transition-colors" data-size-btn="6.0ft" type="button">6.0ft</button>
+<button class="px-2 py-1 text-xs rounded border border-secondary bg-secondary text-white font-medium" data-size-btn="7.5ft" type="button">7.5ft</button>
+<button class="px-2 py-1 text-xs rounded border border-border-hairline text-on-surface hover:border-secondary transition-colors" data-size-btn="9.0ft" type="button">9.0ft</button>
+<button class="px-2 py-1 text-xs rounded border border-border-hairline text-on-surface hover:border-secondary transition-colors" data-size-btn="10ft+" type="button">10ft+</button>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-border-hairline flex items-baseline justify-between">
+<div>
+<span class="font-price-lg text-xl font-bold text-primary" data-card-price="">$349.00</span>
+<span class="text-xs text-text-muted line-through ml-2" data-card-orig-price="">$499.00</span>
+</div>
+<span class="text-[11px] text-text-muted" data-card-affirm="">Or $29/mo via Affirm</span>
+</div>
+</div>
+<div class="p-4 pt-0 grid grid-cols-2 gap-2">
+<button class="bg-primary hover:bg-crimson-deep text-white py-2 text-xs font-semibold rounded flex items-center justify-center space-x-1 transition-colors" data-add-to-cart="" type="button">
+<span class="material-symbols-outlined text-sm">shopping_cart</span>
+<span>Add to Cart</span>
+</button>
+<button class="border border-on-surface text-on-surface hover:bg-on-surface hover:text-white py-2 text-xs font-semibold rounded transition-colors" data-quick-view="" type="button">
+              Quick View
+            </button>
+</div>
+</div>
+<!-- Product Card 3: The Snowy Woodland Fir -->
+<div class="bg-white rounded border border-border-hairline overflow-hidden flex flex-col justify-between group hover:shadow-lg transition-all duration-300" data-product-card="snowy-woodland-fir" data-selected-size="7.5ft">
+<div class="p-4 relative">
+<div class="absolute top-6 left-6 z-10 flex flex-col space-y-1">
+<span class="bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded tracking-wide uppercase">SAVE 30%</span>
+<span class="bg-blue-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded tracking-wide uppercase">FROSTED FLOCK</span>
+</div>
+<button class="absolute top-6 right-6 z-10 text-on-surface/50 hover:text-primary bg-white/80 backdrop-blur-sm p-1.5 rounded-full shadow-sm" data-wishlist-btn="snowy-woodland-fir" onclick="toggleWishlist('snowy-woodland-fir', this)" type="button">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+<!-- Image Frame -->
+<div class="w-full aspect-[4/5] rounded overflow-hidden bg-canvas-cream relative cursor-pointer" onclick="openQuickView('snowy-woodland-fir', '7.5ft')">
+<img alt="The Snowy Woodland Fir Flocked Realistic Tree" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="images/snowy-woodland-fir.png"/>
+</div>
+<div class="flex items-center space-x-1.5 mt-3 text-secondary font-label-caps text-[10px]">
+<span class="material-symbols-outlined text-xs">shield</span>
+<span>10-Year Foliage Guarantee</span>
+</div>
+<h3 class="font-headline-sm text-base font-semibold text-on-surface mt-1 group-hover:text-primary transition-colors cursor-pointer" onclick="openQuickView('snowy-woodland-fir', '7.5ft')">The Snowy Woodland Fir (Heavy Flocked)</h3>
+<div class="flex items-center space-x-1.5 mt-1.5">
+<div class="flex text-amber-500 text-xs">★★★★★</div>
+<span class="font-body-sm text-xs text-text-muted">4.9 (280 reviews)</span>
+</div>
+<div class="mt-4">
+<span class="text-[11px] font-semibold text-text-muted uppercase tracking-wider block mb-1.5">Select Height:</span>
+<div class="flex space-x-1.5">
+<button class="px-2 py-1 text-xs rounded border border-border-hairline text-on-surface hover:border-secondary transition-colors" data-size-btn="6.0ft" type="button">6.0ft</button>
+<button class="px-2 py-1 text-xs rounded border border-secondary bg-secondary text-white font-medium" data-size-btn="7.5ft" type="button">7.5ft</button>
+<button class="px-2 py-1 text-xs rounded border border-border-hairline text-on-surface hover:border-secondary transition-colors" data-size-btn="8.0ft" type="button">8.0ft</button>
+<button class="px-2 py-1 text-xs rounded border border-border-hairline text-on-surface hover:border-secondary transition-colors" data-size-btn="9.0ft" type="button">9.0ft</button>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-border-hairline flex items-baseline justify-between">
+<div>
+<span class="font-price-lg text-xl font-bold text-primary" data-card-price="">$319.00</span>
+<span class="text-xs text-text-muted line-through ml-2" data-card-orig-price="">$460.00</span>
+</div>
+<span class="text-[11px] text-text-muted" data-card-affirm="">Or $27/mo via Affirm</span>
+</div>
+</div>
+<div class="p-4 pt-0 grid grid-cols-2 gap-2">
+<button class="bg-primary hover:bg-crimson-deep text-white py-2 text-xs font-semibold rounded flex items-center justify-center space-x-1 transition-colors" data-add-to-cart="" type="button">
+<span class="material-symbols-outlined text-sm">shopping_cart</span>
+<span>Add to Cart</span>
+</button>
+<button class="border border-on-surface text-on-surface hover:bg-on-surface hover:text-white py-2 text-xs font-semibold rounded transition-colors" data-quick-view="" type="button">
+              Quick View
+            </button>
+</div>
+</div>
+<!-- Product Card 4: Slimline Hudson Fir -->
+<div class="bg-white rounded border border-border-hairline overflow-hidden flex flex-col justify-between group hover:shadow-lg transition-all duration-300" data-product-card="slimline-windsor-fir" data-selected-size="6.0ft">
+<div class="p-4 relative">
+<div class="absolute top-6 left-6 z-10 flex flex-col space-y-1">
+<span class="bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded tracking-wide uppercase">SAVE 28%</span>
+<span class="bg-secondary text-white text-[9px] font-bold px-1.5 py-0.5 rounded tracking-wide uppercase">APARTMENT SLIM</span>
+</div>
+<button class="absolute top-6 right-6 z-10 text-on-surface/50 hover:text-primary bg-white/80 backdrop-blur-sm p-1.5 rounded-full shadow-sm" data-wishlist-btn="slimline-windsor-fir" onclick="toggleWishlist('slimline-windsor-fir', this)" type="button">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+<!-- Image Frame -->
+<div class="w-full aspect-[4/5] rounded overflow-hidden bg-canvas-cream relative cursor-pointer" onclick="openQuickView('slimline-windsor-fir', '6.0ft')">
+<img alt="The Slimline Hudson Fir For Corners and Townhomes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="images/slimline-windsor-fir.png"/>
+</div>
+<div class="flex items-center space-x-1.5 mt-3 text-secondary font-label-caps text-[10px]">
+<span class="material-symbols-outlined text-xs">shield</span>
+<span>10-Year Foliage Guarantee</span>
+</div>
+<h3 class="font-headline-sm text-base font-semibold text-on-surface mt-1 group-hover:text-primary transition-colors cursor-pointer" onclick="openQuickView('slimline-windsor-fir', '6.0ft')">The Slimline Hudson Fir (Narrow Profile)</h3>
+<div class="flex items-center space-x-1.5 mt-1.5">
+<div class="flex text-amber-500 text-xs">★★★★★</div>
+<span class="font-body-sm text-xs text-text-muted">4.8 (195 reviews)</span>
+</div>
+<div class="mt-4">
+<span class="text-[11px] font-semibold text-text-muted uppercase tracking-wider block mb-1.5">Select Height:</span>
+<div class="flex space-x-1.5">
+<button class="px-2 py-1 text-xs rounded border border-secondary bg-secondary text-white font-medium" data-size-btn="6.0ft" type="button">6.0ft</button>
+<button class="px-2 py-1 text-xs rounded border border-border-hairline text-on-surface hover:border-secondary transition-colors" data-size-btn="7.0ft" type="button">7.0ft</button>
+<button class="px-2 py-1 text-xs rounded border border-border-hairline text-on-surface hover:border-secondary transition-colors" data-size-btn="8.0ft" type="button">8.0ft</button>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-border-hairline flex items-baseline justify-between">
+<div>
+<span class="font-price-lg text-xl font-bold text-primary" data-card-price="">$229.00</span>
+<span class="text-xs text-text-muted line-through ml-2" data-card-orig-price="">$320.00</span>
+</div>
+<span class="text-[11px] text-text-muted" data-card-affirm="">Or $19/mo via Affirm</span>
+</div>
+</div>
+<div class="p-4 pt-0 grid grid-cols-2 gap-2">
+<button class="bg-primary hover:bg-crimson-deep text-white py-2 text-xs font-semibold rounded flex items-center justify-center space-x-1 transition-colors" data-add-to-cart="" type="button">
+<span class="material-symbols-outlined text-sm">shopping_cart</span>
+<span>Add to Cart</span>
+</button>
+<button class="border border-on-surface text-on-surface hover:bg-on-surface hover:text-white py-2 text-xs font-semibold rounded transition-colors" data-quick-view="" type="button">
+              Quick View
+            </button>
+</div>
+</div>
+</div>
+<!-- Additional Horizontal Feature Spotlight: Potted Outdoor Pine -->
+<div class="mt-8 bg-white rounded border border-border-hairline p-6 flex flex-col md:flex-row items-center justify-between shadow-sm">
+<div class="flex items-center space-x-6">
+<div class="w-24 h-24 rounded bg-surface-subtle overflow-hidden shrink-0 cursor-pointer" onclick="openQuickView('grand-outdoor-potted-pine', '5.0ft')">
+<img alt="The Grand Outdoor Potted Pine" class="w-full h-full object-cover" src="images/outdoor-potted-pine.png"/>
+</div>
+<div>
+<div class="flex items-center space-x-2">
+<span class="font-label-caps text-label-caps text-secondary font-bold uppercase">Patio &amp; Entryway Special</span>
+<span class="text-text-muted text-xs">•</span>
+<span class="text-amber-500 text-xs">★★★★★ 4.9 (140 reviews)</span>
+</div>
+<h4 class="font-headline-sm text-lg font-semibold text-on-surface mt-0.5 cursor-pointer hover:text-primary transition-colors" onclick="openQuickView('grand-outdoor-potted-pine', '5.0ft')">The Grand Outdoor Potted Pine (Pre-Lit IP65 Commercial)</h4>
+<p class="font-body-sm text-text-muted text-xs max-w-xl mt-1">Weatherproof botanical foliage encased in a weighted architectural urn. Designed for freezing porches, coastal verandas, and luxury entrances.</p>
+</div>
+</div>
+<div class="mt-4 md:mt-0 flex items-center space-x-6 shrink-0">
+<div class="text-right">
+<span class="font-price-lg text-xl font-bold text-primary">$179.00</span>
+<span class="text-xs text-text-muted line-through block">MSRP $250.00</span>
+</div>
+<button class="bg-primary hover:bg-crimson-deep text-white px-5 py-2.5 rounded font-label-md text-xs font-semibold transition-colors" onclick="addToCart('grand-outdoor-potted-pine', '5.0ft', 1)" type="button">
+            Add Outdoor Tree
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. The Kovivita Craftsmanship Showcase ('Why American Botanical Engineering Outlasts') -->
+<section class="max-w-[1440px] mx-auto px-6 md:px-10 py-20">
+<div class="text-center max-w-2xl mx-auto mb-16">
+<span class="font-label-caps text-label-caps text-primary uppercase font-bold tracking-widest">Generational Longevity</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-medium mt-1">Why American Botanical Engineering Outlasts Generic Trees</h2>
+<p class="font-body-md text-text-muted mt-3">We spent 40 years perfecting hyper-realistic molds and durable electrical conduits so you never have to string messy lights or clean up dried needles again.</p>
+</div>
+<!-- 4 Feature Blocks -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Block 1 -->
+<div class="bg-white p-7 rounded border border-border-hairline hover:border-secondary transition-all group">
+<div class="w-12 h-12 rounded bg-pine-frost text-secondary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">nature</span>
+</div>
+<h3 class="font-headline-sm text-lg font-semibold text-on-surface mb-2">True-Needle PE Molded Foliage</h3>
+<p class="font-body-sm text-text-muted leading-relaxed">
+          Cast directly from living Blue Ridge Fraser Fir and Rocky Mountain Pine specimens. Captures subtle branch curvature, two-tone bark nuances, and true soft-touch needles.
+        </p>
+</div>
+<!-- Block 2 -->
+<div class="bg-white p-7 rounded border border-border-hairline hover:border-secondary transition-all group">
+<div class="w-12 h-12 rounded bg-gold-shimmer text-tertiary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">bolt</span>
+</div>
+<h3 class="font-headline-sm text-lg font-semibold text-on-surface mb-2">Instant Power-Pole Assembly</h3>
+<p class="font-body-sm text-text-muted leading-relaxed">
+          No messy plugs between sections. Internal trunk pins instantly channel low-voltage power to all branches the moment the center poles connect. Setup in under 3 minutes.
+        </p>
+</div>
+<!-- Block 3 -->
+<div class="bg-white p-7 rounded border border-border-hairline hover:border-secondary transition-all group">
+<div class="w-12 h-12 rounded bg-rose-50 text-primary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">verified_user</span>
+</div>
+<h3 class="font-headline-sm text-lg font-semibold text-on-surface mb-2">10-Year Master Foliage Guarantee</h3>
+<p class="font-body-sm text-text-muted leading-relaxed">
+          America's longest comprehensive foliage protection. Heavy-gauge memory wire branches will not sag, discolor, or brittle under decades of heavy ornaments.
+        </p>
+</div>
+<!-- Block 4 -->
+<div class="bg-white p-7 rounded border border-border-hairline hover:border-secondary transition-all group">
+<div class="w-12 h-12 rounded bg-slate-100 text-on-surface flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">castle</span>
+</div>
+<h3 class="font-headline-sm text-lg font-semibold text-on-surface mb-2">Commercial Grade Heritage</h3>
+<p class="font-body-sm text-text-muted leading-relaxed">
+          Chosen by historic American estates, Biltmore Estate, Rockefeller Plaza displays, and five-star Manhattan hotels. Engineered with UL-certified fire retardancy and steel cores.
+        </p>
+</div>
+</div>
+</section>
+<!-- 7. Editorial Praise & Real Customer Trust -->
+<section class="bg-white py-20 border-t border-border-hairline">
+<div class="max-w-[1440px] mx-auto px-6 md:px-10">
+<!-- Trust Header Banner -->
+<div class="flex flex-col md:flex-row items-center justify-between pb-12 border-b border-border-hairline">
+<div>
+<span class="font-label-caps text-label-caps text-primary uppercase font-bold tracking-widest">Critically Acclaimed Evergreens</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-medium mt-1">Christmas Trees Worth Talking About</h2>
+</div>
+<div class="mt-4 md:mt-0 flex items-center space-x-3 bg-canvas-cream px-5 py-3 rounded border border-border-hairline">
+<div class="flex text-amber-500 text-lg">★★★★★</div>
+<div class="border-l border-border-hairline pl-3">
+<span class="font-label-md text-label-md text-on-surface font-bold">4.9 / 5.0 Rating</span>
+<span class="font-body-sm text-xs text-text-muted block">12,000+ Verified Customer Reviews</span>
+</div>
+</div>
+</div>
+<!-- Press Quotes Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12">
+<!-- Quote 1 -->
+<div class="flex flex-col justify-between bg-canvas-cream p-8 rounded border border-border-hairline">
+<div>
+<div class="flex text-amber-500 mb-4 text-sm">★★★★★</div>
+<blockquote class="font-headline-sm text-lg italic text-on-surface leading-snug mb-6">
+              “The dark green foliage of this gloriously lifelike pine will have your neighbors and holiday guests doing a double take.”
+            </blockquote>
+</div>
+<div class="pt-4 border-t border-border-hairline/60">
+<span class="font-headline-sm text-base font-semibold text-primary block">Architectural Digest</span>
+<span class="text-xs text-text-muted">US Holiday Home &amp; Design Review</span>
+</div>
+</div>
+<!-- Quote 2 -->
+<div class="flex flex-col justify-between bg-canvas-cream p-8 rounded border border-border-hairline">
+<div>
+<div class="flex text-amber-500 mb-4 text-sm">★★★★★</div>
+<blockquote class="font-headline-sm text-lg italic text-on-surface leading-snug mb-6">
+              “It looks like a Fifth Avenue window display. Apart from the missing sap, you’d be hard pressed to tell this tree isn’t freshly cut in Vermont.”
+            </blockquote>
+</div>
+<div class="pt-4 border-t border-border-hairline/60">
+<span class="font-headline-sm text-base font-semibold text-primary block">House Beautiful</span>
+<span class="text-xs text-text-muted">Family Heritage &amp; Durability Test Winner</span>
+</div>
+</div>
+<!-- Quote 3 -->
+<div class="flex flex-col justify-between bg-canvas-cream p-8 rounded border border-border-hairline">
+<div>
+<div class="flex text-amber-500 mb-4 text-sm">★★★★★</div>
+<blockquote class="font-headline-sm text-lg italic text-on-surface leading-snug mb-6">
+              “The tree has a unique look, with spinier, up-swept branches that look realistic, right down to the brown tips of the twigs. Cheaper trees don’t have the same quality.”
+            </blockquote>
+</div>
+<div class="pt-4 border-t border-border-hairline/60">
+<span class="font-headline-sm text-base font-semibold text-primary block">NYT Wirecutter</span>
+<span class="text-xs text-text-muted">Best Artificial Christmas Tree Roundup</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. Interactive Value Add: Tree Finder Quiz & Fluffing Masterclass -->
+<section class="bg-surface-subtle py-20 border-t border-border-hairline" id="quiz">
+<div class="max-w-[1440px] mx-auto px-6 md:px-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Interactive Card 1: Tree Finder Quiz -->
+<div class="bg-white p-8 md:p-10 rounded border border-border-hairline flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="absolute -right-12 -bottom-12 w-48 h-48 bg-primary/5 rounded-full pointer-events-none"></div>
+<div>
+<div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded bg-amber-50 text-tertiary border border-gold-light/40 font-label-caps text-label-caps mb-4">
+<span class="material-symbols-outlined text-sm">magic_button</span>
+<span>Personalized Selection Tool</span>
+</div>
+<h3 class="font-headline-lg text-headline-md text-on-surface font-semibold mb-3">The 60-Second Live Tree Customizer</h3>
+<p class="font-body-md text-text-muted mb-6 leading-relaxed">
+              Unsure whether a 7.5ft Blue Ridge Fraser Fir or a Slimline Hudson Fir fits your ceiling height and ornament collection? Customize your tree visually in real time.
+            </p>
+<!-- Interactive Quiz Preview Steps -->
+<div class="space-y-3 mb-8">
+<div class="flex items-center justify-between p-3 rounded bg-canvas-cream border border-border-hairline">
+<span class="font-label-md text-xs text-on-surface font-medium">1. What is your ceiling height?</span>
+<span class="text-xs text-primary font-semibold">8ft - 9ft Standard</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded bg-canvas-cream border border-border-hairline">
+<span class="font-label-md text-xs text-on-surface font-medium">2. Lighting preference?</span>
+<span class="text-xs text-primary font-semibold">Dual Warm / Multicolor</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded bg-canvas-cream border border-border-hairline">
+<span class="font-label-md text-xs text-on-surface font-medium">3. Tree silhouette profile?</span>
+<span class="text-xs text-primary font-semibold">Full &amp; Bushy (Gap-Free)</span>
+</div>
+</div>
+</div>
+<a class="bg-primary hover:bg-crimson-deep text-white py-3.5 px-6 rounded font-label-md text-label-md flex items-center justify-center space-x-2 transition-colors" href="quiz.html">
+<span>Launch Tree Finder Quiz</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</div>
+<!-- Interactive Card 2: Branch Fluffing Masterclass -->
+<div class="bg-white p-8 md:p-10 rounded border border-border-hairline flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div>
+<div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded bg-pine-frost text-secondary border border-secondary/20 font-label-caps text-label-caps mb-4">
+<span class="material-symbols-outlined text-sm">school</span>
+<span>Expert Botanical Guide</span>
+</div>
+<h3 class="font-headline-lg text-headline-md text-on-surface font-semibold mb-3">Branch Fluffing Masterclass</h3>
+<p class="font-body-md text-text-muted mb-6 leading-relaxed">
+              Every Kovivita tree arrives packaged for maximum protection. Watch our New York botanical display director demonstrate how to fan the memory branches for full 360° volume.
+            </p>
+<!-- Video Teaser Box with image placeholder -->
+<div class="w-full h-44 rounded overflow-hidden relative group cursor-pointer mb-6 border border-border-hairline" onclick="openMasterclassModal()">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An elegant cinematic still from a luxury Christmas tree decorating masterclass showing hands fluffing hyper-realistic evergreen pine branches in a lavish American estate living room with glowing warm bokeh lights in the background." src="images/arbor-vitae-fir-detail.png"/>
+<div class="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/20 transition-colors">
+<div class="w-14 h-14 rounded-full bg-white/90 text-primary flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl ml-1">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm text-white text-[11px] px-2.5 py-0.5 rounded font-label-caps">
+<span>3 MIN TUTORIAL • 1080P HD</span>
+</div>
+</div>
+</div>
+<button class="border border-on-surface hover:bg-on-surface hover:text-white text-on-surface py-3.5 px-6 rounded font-label-md text-label-md text-center transition-colors" onclick="openMasterclassModal()" type="button">
+            Read Full Fluffing &amp; Storage Guide
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- 9. US Launch VIP Club Newsletter (Festive Crimson Background) -->
+<section class="bg-primary text-white py-16 px-6 relative overflow-hidden">
+<div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-crimson-bright/30 blur-3xl pointer-events-none"></div>
+<div class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-black/20 blur-2xl pointer-events-none"></div>
+<div class="max-w-[900px] mx-auto text-center relative z-10">
+<span class="font-label-caps text-label-caps text-gold-light uppercase tracking-widest font-bold">Exclusive Inaugural Privileges</span>
+<h2 class="font-display-hero text-headline-lg lg:text-display-hero font-semibold text-white mt-2 mb-4">
+        Join The Kovivita Holiday Society
+      </h2>
+<p class="font-body-lg text-white/90 max-w-xl mx-auto mb-8">
+        Receive <strong class="text-gold-light font-semibold">$30 off</strong> your inaugural US tree order, complimentary storage bag upgrade, and priority notifications on rare seasonal drops.
+      </p>
+<form class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-lg mx-auto" onsubmit="event.preventDefault(); alert('Thank you for joining Kovivita Holiday Society! Check your email for your $30 gift voucher.');">
+<input class="w-full sm:flex-1 px-4 py-3.5 rounded text-on-surface text-sm bg-white placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-gold-light border-0 shadow-inner" placeholder="Enter your email address..." required="" type="email"/>
+<button class="w-full sm:w-auto px-7 py-3.5 bg-tertiary-container hover:bg-tertiary text-on-background font-label-md text-label-md font-bold rounded shadow-md transition-all duration-200 whitespace-nowrap" type="submit">
+          Claim My $30 Gift
+        </button>
+</form>
+<p class="font-body-sm text-[11px] text-white/70 mt-4">
+        By subscribing, you agree to our Terms and Privacy Policy. Unsubscribe anytime.
+      </p>
+</div>
+</section>
+<!-- 10. Full Comprehensive Footer (Footer Anchor Execution) -->
+<footer class="bg-surface-subtle text-secondary border-t border-border-hairline" id="support">
+<div class="w-full max-w-[1440px] mx-auto px-6 md:px-10 py-16">
+<!-- Top Column Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-14 border-b border-border-hairline">
+<!-- Column 1: Brand & Heritage -->
+<div class="lg:col-span-2 pr-6">
+<div class="flex items-center space-x-2 mb-3">
+<span class="material-symbols-outlined text-primary text-2xl">forest</span>
+<span class="font-headline-sm text-headline-sm text-primary font-semibold tracking-wide">KOVIVITA</span>
+</div>
+<p class="font-body-sm text-text-muted mb-4 leading-relaxed max-w-sm">
+            Handcrafted luxury evergreens by Christmas Tree World. Founded in New York in 1982, bringing America's premier botanical accuracy, pre-lit convenience, and master foliage guarantees to discerning homes nationwide.
+          </p>
+<div class="flex items-center space-x-4 text-secondary">
+<a class="hover:text-primary transition-colors" href="#" title="Instagram">
+<span class="material-symbols-outlined">photo_camera</span>
+</a>
+<a class="hover:text-primary transition-colors" href="#" title="YouTube">
+<span class="material-symbols-outlined">smart_display</span>
+</a>
+<a class="hover:text-primary transition-colors" href="#" title="Facebook">
+<span class="material-symbols-outlined">share</span>
+</a>
+<a class="hover:text-primary transition-colors" href="#" title="Pinterest">
+<span class="material-symbols-outlined">push_pin</span>
+</a>
+</div>
+</div>
+<!-- Column 2: US Support & Logistics -->
+<div>
+<h4 class="font-label-caps text-label-caps uppercase text-on-surface font-bold tracking-wider mb-4">US Client Care</h4>
+<ul class="space-y-2.5 font-body-sm text-text-muted">
+<li class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-xs text-primary">phone</span>
+<span class="font-semibold text-on-surface">1-800-KOVIVITA</span>
+</li>
+<li class="text-xs">Mon-Fri 8am-8pm EST | Sat 9am-5pm</li>
+<li><a class="hover:text-primary underline transition-all duration-150" href="confirmation.html">Track Your Shipment</a></li>
+<li><a class="hover:text-primary underline transition-all duration-150" href="cart.html">US Distribution Centers (NJ &amp; CA)</a></li>
+<li><a class="hover:text-primary underline transition-all duration-150" href="cart.html">White Glove Delivery Details</a></li>
+<li><a class="hover:text-primary underline transition-all duration-150" href="checkout.html">30-Day In-Home Guarantee</a></li>
+</ul>
+</div>
+<!-- Column 3: The Collections -->
+<div>
+<h4 class="font-label-caps text-label-caps uppercase text-on-surface font-bold tracking-wider mb-4">Tree Collections</h4>
+<ul class="space-y-2.5 font-body-sm text-text-muted">
+<li><a class="hover:text-primary underline transition-all duration-150" href="#bestsellers">Pre-Lit Ultra Micro-LED</a></li>
+<li><a class="hover:text-primary underline transition-all duration-150" href="#bestsellers">Hyper-Realistic Molded Pines</a></li>
+<li><a class="hover:text-primary underline transition-all duration-150" href="#bestsellers">Flocked &amp; Frosted Woodland</a></li>
+<li><a class="hover:text-primary underline transition-all duration-150" href="#bestsellers">Slimline Hudson Fir</a></li>
+<li><a class="hover:text-primary underline transition-all duration-150" href="#bestsellers">Grand Estate 9ft to 14ft Trees</a></li>
+<li><a class="hover:text-primary underline transition-all duration-150" href="#bestsellers">Outdoor Architectural Potted</a></li>
+</ul>
+</div>
+<!-- Column 4: Guarantees & Integrity -->
+<div>
+<h4 class="font-label-caps text-label-caps uppercase text-on-surface font-bold tracking-wider mb-4">Guarantees &amp; Trust</h4>
+<ul class="space-y-2.5 font-body-sm text-text-muted">
+<li><a class="hover:text-primary underline transition-all duration-150 font-semibold text-secondary" href="#">10-Year Foliage Guarantee</a></li>
+<li><a class="hover:text-primary underline transition-all duration-150" href="#">US Distribution Centers</a></li>
+<li><a class="hover:text-primary underline transition-all duration-150" href="#">Toll-Free Support: 1-800-KOVIVITA</a></li>
+<li><a class="hover:text-primary underline transition-all duration-150" href="#">Warranty Registration</a></li>
+<li><a class="hover:text-primary underline transition-all duration-150" href="#">Shipping &amp; Returns Policy</a></li>
+<li><a class="hover:text-primary underline transition-all duration-150" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Legal, Payment & Copyright Strip -->
+<div class="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-text-muted">
+<p class="font-body-sm">
+          © 2025 Kovivita by Christmas Tree World. All rights reserved. American Botanical Heritage, Crafted in the USA.
+        </p>
+<!-- Payment Badges Representation -->
+<div class="flex items-center space-x-3 mt-4 md:mt-0 font-label-caps text-[10px] tracking-wide">
+<span class="px-2 py-1 bg-white border border-border-hairline rounded font-bold">VISA</span>
+<span class="px-2 py-1 bg-white border border-border-hairline rounded font-bold">MASTERCARD</span>
+<span class="px-2 py-1 bg-white border border-border-hairline rounded font-bold">AMEX</span>
+<span class="px-2 py-1 bg-white border border-border-hairline rounded font-bold">APPLE PAY</span>
+<span class="px-2 py-1 bg-white border border-border-hairline rounded font-bold text-primary">AFFIRM (0% APR)</span>
+</div>
+</div>
+</div>
+</footer>
+<script src="app.js"></script>
+</body></html>

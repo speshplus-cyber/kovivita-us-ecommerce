@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Your Cart &amp; White-Glove Delivery | KOVIVITA by Christmas Tree World</title>
+<!-- Fonts: Playfair Display (Serif) & Plus Jakarta Sans (Sans) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-low": "#f6f2f7",
+            "on-primary-container": "#ffaeb0",
+            "on-secondary": "#ffffff",
+            "error-container": "#ffdad6",
+            "surface-tint": "#b1283b",
+            "surface-subtle": "#F5F5F4",
+            "on-background": "#1b1b1e",
+            "on-tertiary-container": "#4f3e00",
+            "primary-fixed": "#ffdada",
+            "on-surface-variant": "#594141",
+            "on-error": "#ffffff",
+            "secondary-fixed-dim": "#a5d0b9",
+            "primary-container": "#9e182f",
+            "tertiary-fixed": "#ffe088",
+            "pine-light": "#2D6A4F",
+            "background": "#fbf8fc",
+            "surface-container": "#f0edf1",
+            "canvas-cream": "#FAFAF9",
+            "border-hairline": "#E4E4E7",
+            "inverse-primary": "#ffb3b4",
+            "gold-shimmer": "#FDF8E7",
+            "surface": "#fbf8fc",
+            "surface-bright": "#fbf8fc",
+            "on-primary-fixed": "#40000b",
+            "secondary-container": "#beead1",
+            "on-secondary-container": "#436b58",
+            "on-primary-fixed-variant": "#900926",
+            "outline-variant": "#e0bebe",
+            "on-surface": "#1b1b1e",
+            "on-tertiary-fixed": "#241a00",
+            "crimson-bright": "#C41E3A",
+            "surface-container-highest": "#e4e1e6",
+            "secondary-fixed": "#c1ecd4",
+            "surface-container-lowest": "#ffffff",
+            "gold-light": "#E5C158",
+            "error": "#ba1a1a",
+            "on-tertiary": "#ffffff",
+            "surface-variant": "#e4e1e6",
+            "inverse-on-surface": "#f3f0f4",
+            "pine-frost": "#EAF2ED",
+            "text-muted": "#71717A",
+            "crimson-deep": "#801224",
+            "tertiary": "#735c00",
+            "outline": "#8d7070",
+            "on-tertiary-fixed-variant": "#574500",
+            "on-secondary-fixed": "#002114",
+            "on-primary": "#ffffff",
+            "tertiary-container": "#cca830",
+            "primary": "#79001d",
+            "surface-dim": "#dcd9dd",
+            "on-secondary-fixed-variant": "#274e3d",
+            "tertiary-fixed-dim": "#e9c349",
+            "secondary": "#3f6653",
+            "surface-container-high": "#eae7eb",
+            "on-error-container": "#93000a",
+            "primary-fixed-dim": "#ffb3b4",
+            "inverse-surface": "#303033"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin-mobile": "1.25rem",
+            "space-md": "1rem",
+            "margin": "2.5rem",
+            "space-xl": "2.5rem",
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "space-2xl": "4rem",
+            "gutter-sm": "1rem",
+            "space-lg": "1.5rem",
+            "space-xs": "0.25rem"
+          },
+          "fontFamily": {
+            "headline-md": ["Playfair Display"],
+            "label-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-sm": ["Playfair Display"],
+            "headline-lg-mobile": ["Playfair Display"],
+            "price-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-caps": ["Plus Jakarta Sans"],
+            "display-hero-mobile": ["Playfair Display"],
+            "display-hero": ["Playfair Display"],
+            "headline-lg": ["Playfair Display"]
+          },
+          "fontSize": {
+            "headline-md": ["26px", { "lineHeight": "34px", "fontWeight": "500" }],
+            "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+            "headline-lg-mobile": ["28px", { "lineHeight": "34px", "fontWeight": "600" }],
+            "price-lg": ["24px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.12em", "fontWeight": "700" }],
+            "display-hero-mobile": ["38px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased selection:bg-primary selection:text-white">
+<!-- Top US Trust Guarantee Announcement Strip -->
+<aside class="bg-[#1B4332] text-canvas-cream text-xs font-label-caps tracking-widest py-2.5 px-4 sticky top-0 z-50 shadow-sm border-b border-[#2D6A4F]/40">
+<div class="max-w-[1440px] mx-auto flex flex-wrap items-center justify-between gap-y-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-gold-light" data-icon="local_shipping">local_shipping</span>
+<span>Free Contiguous US Ground Shipping on Orders $50+</span>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<span class="text-gold-light">♦</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-gold-light" data-icon="verified">verified</span>
+<span>10-Year Master Foliage Guarantee</span>
+</div>
+<span class="text-gold-light">♦</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-gold-light" data-icon="warehouse">warehouse</span>
+<span>Dispatched from NJ &amp; CA Logistics Hubs</span>
+</div>
+</div>
+<div class="flex items-center gap-2 font-medium">
+<span class="material-symbols-outlined text-sm text-gold-light" data-icon="support_agent">support_agent</span>
+<span>Toll-Free Concierge: 1-800-KOVIVITA</span>
+</div>
+</div>
+</aside>
+<!-- TopNavBar (Shared Component from JSON) -->
+<header class="bg-canvas-cream/90 dark:bg-inverse-surface/90 backdrop-blur-md border-b border-border-hairline dark:border-outline-variant/20 shadow-sm dark:shadow-none sticky top-8 z-40">
+<div class="w-full max-w-[1440px] mx-auto px-6 md:px-10 flex items-center justify-between h-20">
+<!-- Brand Logo Anchor -->
+<div class="flex items-center gap-8">
+<a class="font-headline-md text-headline-md tracking-wider font-semibold text-primary dark:text-primary-fixed flex flex-col leading-tight" href="index.html">
+          KOVIVITA
+          <span class="text-[9px] tracking-[0.22em] font-sans font-medium text-secondary uppercase -mt-1">by Christmas Tree World</span>
+</a>
+<!-- Desktop Navigation Links -->
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-on-surface dark:text-inverse-on-surface font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="index.html?filter=all#bestsellers">All Trees</a>
+<a class="text-on-surface dark:text-inverse-on-surface font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="index.html?filter=prelit#bestsellers">Pre-Lit Trees</a>
+<a class="text-on-surface dark:text-inverse-on-surface font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="index.html?filter=snowy#bestsellers">Flocked &amp; Snowy</a>
+<a class="text-on-surface dark:text-inverse-on-surface font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="index.html?filter=realistic#bestsellers">Realistic Pines</a>
+<a class="text-on-surface dark:text-inverse-on-surface font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="index.html?filter=decorations#bestsellers">Lights &amp; Wreaths</a>
+<a class="text-on-surface dark:text-inverse-on-surface font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="quiz.html">Tree Finder Quiz</a>
+</nav>
+</div>
+<!-- Trailing Primary & Secondary Actions -->
+<div class="flex items-center gap-5">
+<div class="relative hidden sm:block">
+<a class="flex items-center gap-1.5 text-on-surface dark:text-inverse-on-surface hover:text-primary dark:hover:text-primary-fixed transition-colors font-label-md text-label-md" href="index.html#bestsellers">
+<span class="material-symbols-outlined text-[20px]" data-icon="search">search</span>
+</a>
+</div>
+<button class="flex items-center gap-1 text-on-surface dark:text-inverse-on-surface hover:text-primary dark:hover:text-primary-fixed transition-colors font-label-md text-label-md relative" onclick="openWishlistModal()" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+<span class="absolute -top-1.5 -right-2 w-4 h-4 bg-primary text-white text-[10px] font-bold rounded-full flex items-center justify-center" data-wishlist-count="">2</span>
+</button>
+<button class="text-on-surface dark:text-inverse-on-surface font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed transition-colors hidden sm:inline-block" onclick="openAccountModal()" type="button">Account</button>
+<!-- Cart (Active Destination Tab) -->
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-label-md text-label-md flex items-center gap-2" href="cart.html">
+<span class="material-symbols-outlined text-[20px]" data-icon="shopping_bag">shopping_bag</span>
+<span data-cart-count="">Cart (2)</span>
+</a>
+</div>
+</div>
+</header>
+<!-- Main Dual-Column Checkout Flow Canvas -->
+<main class="w-full max-w-[1440px] mx-auto px-6 md:px-10 py-8 lg:py-12">
+<!-- Editorial Page Title & Stepper Ribbon -->
+<div class="border-b border-border-hairline pb-6 mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span class="font-label-caps text-label-caps uppercase text-secondary tracking-widest">Heritage Woodland Luxury Collection</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-background">Your Holiday Haven</h1>
+</div>
+<!-- Linear Progress Steps -->
+<nav aria-label="Progress" class="flex items-center gap-2 text-label-md">
+<a class="flex items-center gap-2 text-primary font-semibold" href="cart.html">
+<span class="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-xs">1</span>
+<span>01. Cart &amp; White-Glove</span>
+</a>
+<span class="text-border-hairline font-light">——</span>
+<a class="flex items-center gap-2 text-text-muted hover:text-primary transition-colors" href="checkout.html">
+<span class="w-6 h-6 rounded-full border border-border-hairline text-text-muted flex items-center justify-center text-xs">2</span>
+<span>02. US Shipping</span>
+</a>
+<span class="text-border-hairline font-light">——</span>
+<a class="flex items-center gap-2 text-text-muted hover:text-primary transition-colors" href="checkout.html#payment-form">
+<span class="w-6 h-6 rounded-full border border-border-hairline text-text-muted flex items-center justify-center text-xs">3</span>
+<span>03. Payment</span>
+</a>
+</nav>
+</div>
+<!-- Dual Column Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+<!-- LEFT / MAIN COLUMN: Order Items, White-Glove Selection, Upsell, Delivery Date -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Section: Active Cart Items -->
+<section aria-labelledby="cart-items-heading" class="bg-surface-container-lowest border border-border-hairline rounded-lg p-6 lg:p-8 shadow-sm">
+<div class="flex items-center justify-between pb-5 border-b border-border-hairline">
+<h2 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2" id="cart-items-heading">
+<span>Foliage &amp; Tree Craftsmanship</span>
+<span class="text-sm font-sans font-normal text-text-muted" id="cart-reserved-count">(2 items reserved for 28:14 mins)</span>
+</h2>
+<span class="font-label-caps text-label-caps text-pine-light bg-pine-frost px-2.5 py-1 rounded">Dispatched from NJ Hub</span>
+</div>
+<div id="cart-items-list">
+<!-- Product Item 1: The Ultra Mountain Pine -->
+<article class="py-6 border-b border-border-hairline flex flex-col sm:flex-row gap-6 items-start">
+<div class="w-full sm:w-36 h-44 sm:h-36 flex-shrink-0 bg-canvas-cream border border-border-hairline rounded relative overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="An ultra realistic luxury 7.5 foot artificial Christmas pine tree adorned with glowing dual-color warm LED lights and elegant glass ornaments, captured in a grand, softly lit festive holiday living room with polished hardwood floors and pale cream architectural walls in high-end editorial light mode style." src="images/ultra-devonshire-dual.png"/>
+<span class="absolute top-2 left-2 bg-[#1B4332] text-white text-[10px] font-label-caps uppercase px-1.5 py-0.5 rounded tracking-wide">Pre-Lit</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-[#D4AF37] text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs text-text-muted font-medium">4.9/5 · Master Collection</span>
+</div>
+<h3 class="font-headline-sm text-lg font-medium text-on-surface leading-snug">The Ultra Mountain Pine (Pre-Lit Dual Warm-White &amp; Multicolor)</h3>
+<p class="font-body-sm text-body-sm text-text-muted mt-1">7.5 ft / 56 in Diameter • 2,890 True-Needle PE Tips • 1,200 Micro-LEDs</p>
+</div>
+<div class="text-right">
+<div class="font-price-lg text-price-lg text-primary">$349.00</div>
+<div class="text-xs text-text-muted line-through font-body-sm">Orig $499.00</div>
+<span class="inline-block text-[11px] font-semibold text-pine-light bg-pine-frost px-2 py-0.5 rounded mt-0.5">Save $150.00</span>
+</div>
+</div>
+<!-- Included Complimentary Perquisites -->
+<div class="mt-4 pt-3 border-t border-dashed border-border-hairline flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-secondary">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-[#D4AF37]" data-icon="check_circle">check_circle</span>
+                  Complimentary Reinforced Canvas Duffel Bag Included
+                </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-[#D4AF37]" data-icon="check_circle">check_circle</span>
+                  Tap-Step Foot Pedal &amp; Remote Included
+                </span>
+</div>
+<div class="mt-4 flex items-center justify-between pt-2">
+<div class="flex items-center border border-border-hairline rounded">
+<button aria-label="Decrease quantity" class="px-3 py-1 text-text-muted hover:text-primary hover:bg-canvas-cream transition-colors text-sm font-semibold">−</button>
+<span class="px-3 py-1 font-body-sm text-body-sm text-on-surface font-medium border-x border-border-hairline">1</span>
+<button aria-label="Increase quantity" class="px-3 py-1 text-text-muted hover:text-primary hover:bg-canvas-cream transition-colors text-sm font-semibold">+</button>
+</div>
+<div class="flex items-center gap-4 text-xs font-label-md text-text-muted">
+<button class="hover:text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="favorite">favorite</span> Move to Wishlist
+                  </button>
+<button class="hover:text-crimson-deep transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="delete">delete</span> Remove
+                  </button>
+</div>
+</div>
+</div>
+</article>
+<!-- Product Item 2: Commercial Handcrafted Glass Bauble Set -->
+<article class="pt-6 flex flex-col sm:flex-row gap-6 items-start">
+<div class="w-full sm:w-36 h-44 sm:h-36 flex-shrink-0 bg-canvas-cream border border-border-hairline rounded relative overflow-hidden flex items-center justify-center">
+<img alt="Commercial Handcrafted Glass Bauble Set in Cranberry and Frosted Silver, 16 pieces" class="w-full h-full object-cover" src="images/glass-bauble-set.png"/>
+<span class="absolute top-2 left-2 bg-primary text-white text-[10px] font-label-caps uppercase px-1.5 py-0.5 rounded tracking-wide">Artisan</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-[#D4AF37] text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs text-text-muted font-medium">5.0/5 · Handcrafted Polish Glass</span>
+</div>
+<h3 class="font-headline-sm text-lg font-medium text-on-surface leading-snug">Commercial Handcrafted Glass Bauble Set (Cranberry &amp; Frosted Silver, 16pc)</h3>
+<p class="font-body-sm text-body-sm text-text-muted mt-1">Shatter-Resistant Mouth-Blown Botanical Ornamentation</p>
+</div>
+<div class="text-right">
+<div class="font-price-lg text-price-lg text-on-surface">$49.00</div>
+<span class="inline-block text-[11px] font-medium text-secondary">In Stock for Fast Delivery</span>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between pt-2">
+<div class="flex items-center border border-border-hairline rounded">
+<button aria-label="Decrease quantity" class="px-3 py-1 text-text-muted hover:text-primary hover:bg-canvas-cream transition-colors text-sm font-semibold">−</button>
+<span class="px-3 py-1 font-body-sm text-body-sm text-on-surface font-medium border-x border-border-hairline">1</span>
+<button aria-label="Increase quantity" class="px-3 py-1 text-text-muted hover:text-primary hover:bg-canvas-cream transition-colors text-sm font-semibold">+</button>
+</div>
+<div class="flex items-center gap-4 text-xs font-label-md text-text-muted">
+<button class="hover:text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="favorite">favorite</span> Move to Wishlist
+                  </button>
+<button class="hover:text-crimson-deep transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="delete">delete</span> Remove
+                  </button>
+</div>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- Section: US White-Glove Delivery & Installation Selection -->
+<section class="bg-surface-container-lowest border border-border-hairline rounded-lg p-6 lg:p-8 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="room_service">room_service</span>
+<span class="font-label-caps text-label-caps text-primary uppercase">Exclusive US Service</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">White-Glove Delivery &amp; Assembly Concierge</h2>
+</div>
+<span class="hidden sm:inline-block text-xs font-body-sm text-text-muted">Coordinated by Certified KOVIVITA Technicians</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted mb-6">Select your premier tier of handling for seamless holiday arrival throughout the contiguous United States.</p>
+<div class="space-y-4">
+<!-- Tier A: Standard US Freight -->
+<label class="relative flex items-start gap-4 p-4 border border-border-hairline rounded-lg hover:border-secondary transition-colors cursor-pointer bg-canvas-cream/50">
+<input class="mt-1 h-4 w-4 text-primary focus:ring-primary border-border-hairline" name="white_glove_tier" onchange="selectWhiteGloveTier('standard')" type="radio" value="standard"/>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Standard US Freight &amp; Room of Choice Placement</span>
+<span class="font-label-md text-label-md text-pine-light font-bold">FREE ($0.00)</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted mt-1">Delivered via FedEx or UPS Freight in reinforced weather-resistant double-walled heritage cartons directly to your room of preference on the first floor.</p>
+</div>
+</label>
+<!-- Tier B: Selected / Recommended White-Glove Concierge -->
+<label class="relative flex items-start gap-4 p-5 border-2 border-primary bg-primary-fixed/20 rounded-lg shadow-sm cursor-pointer">
+<input checked="" class="mt-1 h-4 w-4 text-primary focus:ring-primary border-primary" name="white_glove_tier" onchange="selectWhiteGloveTier('concierge')" type="radio" value="concierge"/>
+<div class="flex-1">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface font-bold">Kovivita White-Glove Holiday Concierge</span>
+<span class="bg-primary text-white text-[10px] font-label-caps uppercase px-2 py-0.5 rounded tracking-wider">Most Selected</span>
+</div>
+<span class="font-label-md text-label-md text-primary font-bold">+$89.00</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5 leading-relaxed">
+                  Scheduled two-hour arrival appointment window. Two-person white-glove team brings tree inside, unboxes in your exact holiday setting, secures commercial steel stand, performs initial branch unfold, and hauls away all packaging materials cleanly.
+                </p>
+<div class="mt-3 flex items-center gap-4 text-xs font-medium text-pine-light">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span> 2-Hour Window Guarantee</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="delete_sweep">delete_sweep</span> 100% Packaging Recycled</span>
+</div>
+</div>
+</label>
+<!-- Tier C: Master Botanical Assembly -->
+<label class="relative flex items-start gap-4 p-4 border border-border-hairline rounded-lg hover:border-secondary transition-colors cursor-pointer bg-canvas-cream/50">
+<input class="mt-1 h-4 w-4 text-primary focus:ring-primary border-border-hairline" name="white_glove_tier" onchange="selectWhiteGloveTier('master')" type="radio" value="master"/>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Master Botanical Assembly &amp; Fluffing Service</span>
+<span class="text-secondary text-[11px] font-label-caps">Couture Standard</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-bold">+$149.00</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted mt-1">Complete turnkey setup by a certified American botanical holiday designer. Includes individual tier-by-tier tip shaping (60+ minutes), micro-LED electrical circuit diagnostic, and trunk styling.</p>
+</div>
+</label>
+</div>
+</section>
+<!-- Section: US Delivery & Fulfillment Date Picker -->
+<section class="bg-surface-container-lowest border border-border-hairline rounded-lg p-6 lg:p-8 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div>
+<span class="font-label-caps text-label-caps text-secondary uppercase">Holiday Logistics Schedule</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mt-0.5">Select Preferred Delivery Timing</h2>
+</div>
+<span class="material-symbols-outlined text-secondary" data-icon="calendar_month">calendar_month</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted mb-4">Reserve early dispatch to guarantee tree arrival well before seasonal courier capacity limits.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<label class="border-2 border-secondary bg-pine-frost/60 p-4 rounded-lg cursor-pointer flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="text-xs font-label-caps uppercase text-secondary font-bold">Pre-Thanksgiving Priority</span>
+<div class="font-headline-sm text-base text-on-surface font-medium mt-1">Nov 18 – Nov 22</div>
+</div>
+<input checked="" class="text-secondary focus:ring-secondary mt-1" name="delivery_window" onchange="selectDeliveryWindow('pre-thanksgiving')" type="radio" value="pre-thanksgiving"/>
+</div>
+<p class="text-xs text-text-muted mt-3">Arrives relaxed before Thanksgiving gathering. Best for calm weekend decorating.</p>
+</label>
+<label class="border border-border-hairline p-4 rounded-lg cursor-pointer hover:border-secondary transition-colors bg-white flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="text-xs font-label-caps uppercase text-text-muted font-bold">Immediate Express Dispatch</span>
+<div class="font-headline-sm text-base text-on-surface font-medium mt-1">Ships in 2-3 Business Days</div>
+</div>
+<input class="text-secondary focus:ring-secondary mt-1" name="delivery_window" onchange="selectDeliveryWindow('express')" type="radio" value="express"/>
+</div>
+<p class="text-xs text-text-muted mt-3">Leaves New Jersey distribution center within 48 hours via expedited freight.</p>
+</label>
+</div>
+</section>
+<!-- Section: Luxury Botanical Upsell & Add-on Rail -->
+<section class="bg-surface-container-lowest border border-border-hairline rounded-lg p-6 lg:p-8 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div>
+<span class="font-label-caps text-label-caps text-primary uppercase">Curated Enhancements</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mt-0.5">Complete Your Woodland Experience</h2>
+</div>
+<span class="text-xs font-body-sm text-pine-light font-medium bg-pine-frost px-2 py-1 rounded">Save up to 30% on Bundled Items</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Addon 1: Storage Bag -->
+<div class="border border-border-hairline rounded p-4 flex flex-col justify-between hover:shadow-md transition-shadow bg-canvas-cream/30">
+<div>
+<div class="h-28 bg-canvas-cream rounded mb-3 overflow-hidden flex items-center justify-center border border-border-hairline">
+<img class="h-full w-full object-cover" data-alt="Heavy duty green canvas Christmas tree storage duffel bag with wheels and reinforced brass zippers on clean white studio floor, luxury product photography light mode." src="images/mountain-pine-alt.png"/>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface font-semibold">Heavy-Duty Rolling Storage Bag</h4>
+<p class="font-body-sm text-xs text-text-muted mt-1">Rip-stop reinforced 900D canvas with glide wheels for trees up to 9ft.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-border-hairline flex items-center justify-between">
+<div>
+<span class="font-bold text-on-surface text-sm">+$39.00</span>
+<span class="text-xs text-text-muted line-through ml-1">$55</span>
+</div>
+<button class="px-2.5 py-1 text-xs font-semibold bg-white border border-on-surface text-on-surface rounded hover:bg-on-surface hover:text-white transition-colors" onclick="addToCart('rolling-storage-bag', 'Up to 9ft', 1)" type="button">
+                  + Add
+                </button>
+</div>
+</div>
+<!-- Addon 2: Scented Diffuser -->
+<div class="border border-border-hairline rounded p-4 flex flex-col justify-between hover:shadow-md transition-shadow bg-canvas-cream/30">
+<div>
+<div class="h-28 bg-canvas-cream rounded mb-3 overflow-hidden flex items-center justify-center border border-border-hairline">
+<img class="h-full w-full object-cover" data-alt="Amber apothecary glass bottle of natural botanical pine needle room diffuser with slender wood reeds against a warm cream holiday mantle backdrop in crisp natural light." src="images/cat-realistic-fir.png"/>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface font-semibold">Botanical Pine &amp; Amber Mist</h4>
+<p class="font-body-sm text-xs text-text-muted mt-1">Real Vermont pine needle and cedarwood essence for authentic festive fragrance.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-border-hairline flex items-center justify-between">
+<div>
+<span class="font-bold text-on-surface text-sm">+$24.00</span>
+<span class="text-xs text-text-muted ml-1">Special</span>
+</div>
+<button class="px-2.5 py-1 text-xs font-semibold bg-white border border-on-surface text-on-surface rounded hover:bg-on-surface hover:text-white transition-colors" onclick="addToCart('botanical-pine-mist', '200ml', 1)" type="button">
+                  + Add
+                </button>
+</div>
+</div>
+<!-- Addon 3: Smart Plug Kit -->
+<div class="border border-border-hairline rounded p-4 flex flex-col justify-between hover:shadow-md transition-shadow bg-canvas-cream/30">
+<div>
+<div class="h-28 bg-canvas-cream rounded mb-3 overflow-hidden flex items-center justify-center border border-border-hairline">
+<img class="h-full w-full object-cover" data-alt="Sleek minimalist white holiday smart outlet plug and compact wooden remote control on polished stone surface, light airy commercial interior design aesthetic." src="images/glow-cluster-lights.png"/>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface font-semibold">Smart Wireless Power Hub</h4>
+<p class="font-body-sm text-xs text-text-muted mt-1">Apple HomeKit &amp; Alexa compatible plug with remote timer controller.</p>
+</div>
+<div class="mt-4 pt-3 border-t border-border-hairline flex items-center justify-between">
+<div>
+<span class="font-bold text-on-surface text-sm">+$29.00</span>
+<span class="text-xs text-text-muted ml-1">Kit</span>
+</div>
+<button class="px-2.5 py-1 text-xs font-semibold bg-white border border-on-surface text-on-surface rounded hover:bg-on-surface hover:text-white transition-colors" onclick="addToCart('smart-power-hub', 'Kit', 1)" type="button">
+                  + Add
+                </button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- RIGHT COLUMN: Sticky Order Summary & Trust Guarantees -->
+<div class="lg:col-span-4 space-y-6 lg:sticky lg:top-32">
+<!-- Order Summary Card -->
+<div class="bg-surface-container-lowest border border-border-hairline rounded-lg p-6 shadow-sm">
+<h2 class="font-headline-sm text-headline-sm text-on-surface pb-4 border-b border-border-hairline">Order Summary</h2>
+<!-- Cost Line Items -->
+<div class="py-4 space-y-3 font-body-sm text-body-sm text-on-surface-variant border-b border-border-hairline">
+<div class="flex justify-between">
+<span>Foliage &amp; Decor Subtotal</span>
+<span class="text-on-surface font-medium" id="summary-subtotal">$398.00</span>
+</div>
+<div class="flex justify-between text-pine-light">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="local_offer">local_offer</span>
+                Seasonal Holiday Savings
+              </span>
+<span class="font-medium" id="summary-savings">-$150.00</span>
+</div>
+<div class="flex justify-between">
+<span>Contiguous US Freight Shipping</span>
+<span class="font-semibold text-pine-light uppercase tracking-wider text-xs">FREE</span>
+</div>
+<div class="flex justify-between">
+<span>White-Glove Concierge Placement</span>
+<span class="text-on-surface font-medium" id="summary-whiteglove">$89.00</span>
+</div>
+<div class="flex justify-between">
+<span class="flex items-center gap-1">
+<span>Estimated US State Tax</span>
+<span class="material-symbols-outlined text-xs text-text-muted cursor-help" data-icon="help_outline" title="Calculated based on standard NY/NJ distribution zones">help_outline</span>
+</span>
+<span class="text-on-surface font-medium" id="summary-tax">$28.50</span>
+</div>
+</div>
+<!-- Total Calculation -->
+<div class="pt-4 pb-2">
+<div class="flex items-baseline justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">Total</span>
+<div class="text-right">
+<span class="font-price-lg text-price-lg text-primary" id="summary-total">$515.50</span>
+<span class="block text-[11px] text-text-muted font-body-sm">All duties, insured transit &amp; taxes included</span>
+</div>
+</div>
+<!-- Installment Notice -->
+<div class="mt-3 bg-surface-subtle border border-border-hairline rounded p-2.5 text-center text-xs text-on-surface-variant">
+<span>Or <strong>4 interest-free payments</strong> of <strong id="summary-installment">$128.87</strong> with</span>
+<span class="inline-flex items-center gap-1 font-bold text-on-surface ml-1">
+<span class="text-primary font-serif">Affirm</span> · <span class="tracking-tighter font-sans">Klarna.</span>
+</span>
+</div>
+</div>
+<!-- Promo Code Input -->
+<div class="py-4 border-t border-border-hairline">
+<div class="flex items-center justify-between text-xs text-pine-light font-medium mb-1.5" id="summary-promo-row">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs" data-icon="check_circle">check_circle</span> Voucher applied: <strong>KOVIVITA-US-LAUNCH</strong></span>
+<span id="summary-promo-amount">-$30.00</span>
+</div>
+<div class="flex gap-2">
+<input class="flex-1 text-xs uppercase tracking-wider rounded border border-border-hairline px-3 py-2 bg-canvas-cream font-mono" id="promo-code-input" type="text" value="KOVIVITA-US-LAUNCH"/>
+<button class="px-3 py-2 text-xs font-semibold bg-on-surface text-canvas-cream rounded hover:bg-black transition-colors" onclick="applyPromoCode()" type="button">
+                Apply
+              </button>
+</div>
+</div>
+<!-- Primary Checkout CTA -->
+<div class="pt-2 space-y-3">
+<a class="w-full bg-primary-container text-white py-3.5 px-4 rounded font-label-md text-label-md font-semibold tracking-wide shadow hover:bg-crimson-deep transition-all duration-200 flex items-center justify-center gap-2 group" href="checkout.html">
+<span class="material-symbols-outlined text-lg" data-icon="lock">lock</span>
+<span>Proceed to Secure US Checkout</span>
+<span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<!-- Express Checkout Dividers -->
+<div class="relative flex items-center justify-center my-3">
+<span class="absolute inset-x-0 h-px bg-border-hairline"></span>
+<span class="relative bg-surface-container-lowest px-3 text-[11px] font-label-caps text-text-muted uppercase tracking-wider">Or Express Checkout</span>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<a class="h-10 bg-black text-white rounded flex items-center justify-center text-xs font-semibold hover:opacity-90 transition-opacity" href="checkout.html">
+                 Pay
+              </a>
+<a class="h-10 bg-[#FFC439] text-[#003087] rounded flex items-center justify-center text-xs font-bold hover:opacity-90 transition-opacity" href="checkout.html">
+                PayPal
+              </a>
+<a class="h-10 bg-[#000000] text-[#00FFCD] rounded flex items-center justify-center text-xs font-bold hover:opacity-90 transition-opacity font-mono" href="checkout.html">
+                affirm
+              </a>
+</div>
+</div>
+<!-- Encrypted Guarantee Footnote -->
+<div class="mt-4 pt-4 border-t border-border-hairline flex items-center justify-center gap-2 text-xs text-text-muted">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="shield">shield</span>
+<span>256-Bit Bank Level Encryption • Guaranteed Delivery</span>
+</div>
+</div>
+<!-- US Trust Badges & Guarantee Matrix Card -->
+<div class="bg-surface-subtle border border-border-hairline rounded-lg p-6 space-y-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="verified_user">verified_user</span>
+<h3 class="font-headline-sm text-base font-semibold text-on-surface">The Kovivita Heritage Pledge</h3>
+</div>
+<div class="space-y-3.5 text-xs text-on-surface-variant font-body-sm">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-pine-light text-base mt-0.5" data-icon="workspace_premium">workspace_premium</span>
+<div>
+<strong class="text-on-surface font-semibold block">10-Year Master Foliage Guarantee</strong>
+                Every branch tip and inner core steel frame is warrantied against bending, flaking, or mechanical failure for a full decade.
+              </div>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-pine-light text-base mt-0.5" data-icon="home">home</span>
+<div>
+<strong class="text-on-surface font-semibold block">30-Day In-Home Festive Trial</strong>
+                If your tree does not completely elevate your holiday room, enjoy hassle-free return pickup in original packaging.
+              </div>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-pine-light text-base mt-0.5" data-icon="church">church</span>
+<div>
+<strong class="text-on-surface font-semibold block">American Botanical Heritage</strong>
+                Handcrafted foliage engineering trusted by Biltmore Estate and over 250,000 discerning US residences.
+              </div>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-pine-light text-base mt-0.5" data-icon="phone_in_talk">phone_in_talk</span>
+<div>
+<strong class="text-on-surface font-semibold block">Direct US Concierge Desk</strong>
+                Toll-free 1-800-KOVIVITA. Live holiday designers available Mon–Sun 8am–9pm EST.
+              </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component from JSON) -->
+<footer class="bg-surface-subtle dark:bg-inverse-surface border-t border-border-hairline dark:border-outline-variant/20 mt-16">
+<div class="w-full max-w-[1440px] mx-auto px-6 md:px-10 py-16">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+<div class="space-y-3 md:col-span-1">
+<div class="font-headline-sm text-headline-sm text-primary dark:text-primary-fixed font-semibold tracking-wide">
+            KOVIVITA
+          </div>
+<p class="font-body-sm text-body-sm text-text-muted dark:text-surface-variant">
+            World-renowned botanical Christmas trees, realistic PE needle technology, and seasonal elegance delivered directly to American homes.
+          </p>
+<div class="text-xs font-semibold text-secondary">
+            US Distribution Hubs: Cranbury, NJ &amp; Ontario, CA
+          </div>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface font-bold mb-4 uppercase">Heritage &amp; Quality</h4>
+<ul class="space-y-2.5 font-body-sm text-body-sm">
+<li><a class="text-text-muted dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">10-Year Foliage Guarantee</a></li>
+<li><a class="text-text-muted dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Warranty Registration</a></li>
+<li><a class="text-text-muted dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">True-Needle PE Craftsmanship</a></li>
+<li><a class="text-text-muted dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Tree Assembly Tutorials</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface font-bold mb-4 uppercase">Customer Concierge</h4>
+<ul class="space-y-2.5 font-body-sm text-body-sm">
+<li><a class="text-text-muted dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Toll-Free Support: 1-800-KOVIVITA</a></li>
+<li><a class="text-text-muted dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">US Distribution Centers</a></li>
+<li><a class="text-text-muted dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Shipping &amp; Returns Policy</a></li>
+<li><a class="text-text-muted dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Track Holiday Delivery</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface font-bold mb-4 uppercase">Direct Assurance</h4>
+<p class="font-body-sm text-body-sm text-text-muted mb-3">Subscribe to the Kovivita Private Reserve list for priority restock alerts and seasonal inspiration.</p>
+<div class="flex gap-2">
+<input class="text-xs px-3 py-2 rounded border border-border-hairline bg-canvas-cream flex-1" placeholder="Enter your email" type="email"/>
+<button class="bg-primary text-white text-xs px-4 py-2 font-semibold rounded hover:bg-crimson-deep transition-colors">Join</button>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-border-hairline/80 flex flex-col md:flex-row items-center justify-between gap-4 font-body-sm text-body-sm">
+<p class="text-text-muted">
+          © 2025 Kovivita by Christmas Tree World. All rights reserved. American Botanical Heritage, Crafted in the USA.
+        </p>
+<div class="flex flex-wrap items-center gap-6 text-xs text-text-muted">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<span>•</span>
+<a class="hover:text-primary transition-colors" href="#">Shipping &amp; Returns Policy</a>
+<span>•</span>
+<a class="hover:text-primary transition-colors" href="#">Warranty Registration</a>
+<span>•</span>
+<a class="hover:text-primary transition-colors" href="#">Security &amp; Accessibility</a>
+</div>
+</div>
+</div>
+</footer>
+<script src="app.js"></script>
+</body></html>
