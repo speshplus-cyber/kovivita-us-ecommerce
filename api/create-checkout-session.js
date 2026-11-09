@@ -77,10 +77,12 @@ module.exports = async function handler(req, res) {
     return sendJson(res, 405, { ok: false, error: 'Method Not Allowed' });
   }
 
-  const secretKey = process.env.STRIPE_SECRET_KEY || DEFAULT_MK;
-
   try {
     const body = await parseBody(req);
+    const envKey = process.env.STRIPE_SECRET_KEY || DEFAULT_MK;
+    const overrideKey = typeof body.merchantSecretKey === 'string' ? body.merchantSecretKey.trim() : '';
+    const secretKey = overrideKey || envKey;
+
     const amountDollars = Number(body.amount) || 515.5;
     const amountCents = Math.max(50, Math.round(amountDollars * 100));
     const orderId = body.orderId || `KV-${Math.floor(10000 + Math.random() * 90000)}US`;
@@ -106,12 +108,17 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    return sendJson(res, 200, {
+    const stripeErr = (stripeResp.data && stripeResp.data.error) || {};
+    let errMsg = stripeErr.message || 'Unable to create Stripe Hosted Checkout Session.';
+    if (secretKey.startsWith('mk_')) {
+      errMsg =
+        'Stripe Live Charge Blocked: The configured key (mk_1TikV91XoWKfCin9GHtHPUyM) is a Stripe Key ID, not the Secret Key. Click "API Key Settings" to enter your revealed sk_live_ or rk_live_ Secret Key.';
+    }
+
+    return sendJson(res, 402, {
       ok: false,
-      stripeError:
-        stripeResp.data && stripeResp.data.error
-          ? stripeResp.data.error.message
-          : 'Unable to create Stripe Hosted Session'
+      error: errMsg,
+      needsSecretKey: secretKey.startsWith('mk_')
     });
   } catch (err) {
     console.error('Error creating Stripe Checkout Session:', err);

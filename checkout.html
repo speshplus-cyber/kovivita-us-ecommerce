@@ -277,14 +277,14 @@
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
 <!-- Apple Pay Button -->
-<button class="w-full h-12 bg-black hover:bg-neutral-800 text-white rounded-lg flex items-center justify-center space-x-2 transition-all shadow-sm group" onclick="completeCheckoutOrder(true)" type="button">
+<button class="w-full h-12 bg-black hover:bg-neutral-800 text-white rounded-lg flex items-center justify-center space-x-2 transition-all shadow-sm group" onclick="launchStripeExpressCheckout('Apple Pay')" type="button">
 <svg aria-hidden="true" class="w-5 h-5 fill-current" viewbox="0 0 24 24">
 <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.87-.93.04-2.02.63-2.65 1.38-.56.65-.99 1.71-.87 2.72 1.05.08 2.05-.54 2.6-1.23z"></path>
 </svg>
 <span class="font-label-md text-sm font-semibold tracking-wide">Pay</span>
 </button>
 <!-- Google Pay Button -->
-<button class="w-full h-12 bg-white hover:bg-gray-50 border border-neutral-300 text-neutral-800 rounded-lg flex items-center justify-center space-x-2 transition-all shadow-sm" onclick="completeCheckoutOrder(true)" type="button">
+<button class="w-full h-12 bg-white hover:bg-gray-50 border border-neutral-300 text-neutral-800 rounded-lg flex items-center justify-center space-x-2 transition-all shadow-sm" onclick="launchStripeExpressCheckout('Google Pay')" type="button">
 <svg class="w-5 h-5" viewbox="0 0 24 24">
 <path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.15z" fill="#4285F4"></path>
 <path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.35 24 12 24z" fill="#34A853"></path>
@@ -294,7 +294,7 @@
 <span class="font-label-md text-sm font-semibold tracking-wide">Pay</span>
 </button>
 <!-- Stripe Link Button -->
-<button class="w-full h-12 bg-[#00D66F] hover:bg-[#00be62] text-[#0A2540] rounded-lg flex items-center justify-center space-x-1.5 transition-all shadow-sm font-label-md font-bold text-sm" onclick="completeCheckoutOrder(true)" type="button">
+<button class="w-full h-12 bg-[#00D66F] hover:bg-[#00be62] text-[#0A2540] rounded-lg flex items-center justify-center space-x-1.5 transition-all shadow-sm font-label-md font-bold text-sm" onclick="launchStripeExpressCheckout('Stripe Link')" type="button">
 <span>link</span>
 <span class="text-xs font-normal opacity-85">by Stripe</span>
 </button>
@@ -325,7 +325,7 @@
 <span class="px-1.5 py-0.5 bg-white border border-border-hairline rounded text-[10px] font-bold text-blue-500 tracking-tighter">AMEX</span>
 </div>
 </label>
-<label class="flex items-center justify-between p-3.5 border border-border-hairline bg-surface-subtle hover:bg-white rounded-lg cursor-pointer transition-all">
+<label class="flex items-center justify-between p-3.5 border border-border-hairline bg-surface-subtle hover:bg-white rounded-lg cursor-pointer transition-all" onclick="launchStripeExpressCheckout('Affirm / Klarna')">
 <div class="flex items-center space-x-3">
 <input class="text-primary focus:ring-primary h-4 w-4" name="payment_type" type="radio"/>
 <div>
@@ -350,7 +350,7 @@
                 Name on Card
               </label>
 <div class="relative">
-<input class="w-full bg-white border border-border-hairline rounded-lg px-4 py-3 text-body-md text-on-surface focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm font-label-md" id="cardholder-name" placeholder="Eleanor Vance" required="" type="text" value="Eleanor Vance"/>
+<input class="w-full bg-white border border-border-hairline rounded-lg px-4 py-3 text-body-md text-on-surface focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm font-label-md" id="cardholder-name" placeholder="Full Name on Card" required="" type="text" value=""/>
 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-text-muted">
 <span class="material-symbols-outlined text-lg">person</span>
 </div>
@@ -359,53 +359,29 @@
 <!-- Stripe Card Number Field -->
 <div>
 <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-<label class="block font-label-caps text-[11px] text-text-muted uppercase" for="card-number">
-                  Card Information (Stripe Live Gateway)
+<label class="block font-label-caps text-[11px] text-text-muted uppercase">
+                  Credit or Debit Card (Live Stripe Verification Required)
                 </label>
 <div class="flex items-center space-x-2 text-xs">
 <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-[#1B4332] text-[10px] font-bold border border-emerald-200" id="stripe-live-status-badge">
 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-<span>Stripe Live Connected</span>
+<span id="stripe-status-text">Stripe Live Gateway Active</span>
 </span>
-<button class="text-[10px] font-semibold text-primary underline hover:text-crimson-deep" id="toggle-stripe-input-mode" onclick="toggleStripeInputMode()" type="button">
-                    Switch to Pre-Filled Card
+<button class="text-[10px] font-semibold text-secondary underline hover:text-primary" id="stripe-key-config-btn" onclick="openStripeKeyModal()" type="button">
+                    API Key Settings
                   </button>
 </div>
 </div>
 <!-- Live Stripe.js Mounted Card Element Container -->
 <div class="bg-white border-2 border-[#1B4332]/40 rounded-lg p-3.5 shadow-sm transition-all" id="stripe-live-element-wrapper">
-<div class="py-1" id="stripe-card-mount"></div>
+<div class="py-1.5" id="stripe-card-mount"></div>
 <div class="mt-2 pt-2 border-t border-border-hairline/60 flex items-center justify-between text-[10px] text-text-muted">
-<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-secondary">lock</span> Tokenized directly via Stripe Live Key (<code class="font-mono">pk_live_51Tijd...E9ZR</code>)</span>
-<span class="font-mono uppercase font-bold text-[#1B4332]">LIVE MODE</span>
-</div>
-</div>
-<!-- Combined Card Element Shell (Fallback / Pre-Filled Mode) -->
-<div class="hidden bg-white border border-border-hairline rounded-lg divide-y divide-border-hairline shadow-sm focus-within:ring-2 focus-within:ring-primary focus-within:border-primary transition-all" id="manual-card-shell">
-<div class="relative flex items-center px-3.5 py-3">
-<span class="material-symbols-outlined text-text-muted mr-3 text-xl">credit_card</span>
-<input class="w-full bg-transparent border-0 p-0 text-body-md font-mono tracking-wider focus:ring-0 text-on-surface placeholder:text-text-muted/60" id="card-number" placeholder="4242 •••• •••• 4242" type="text" value="4242 8920 3411 9084"/>
-<!-- Detected Card Brand Pill -->
-<div class="flex items-center space-x-1 pl-2">
-<span class="px-2 py-0.5 bg-blue-50 text-blue-800 text-[10px] font-bold rounded border border-blue-200">VISA</span>
-</div>
-</div>
-<div class="grid grid-cols-2 divide-x divide-border-hairline">
-<div class="px-3.5 py-2.5">
-<label class="block text-[10px] font-label-caps text-text-muted uppercase" for="expiry">Expires</label>
-<input class="w-full bg-transparent border-0 p-0 text-body-sm font-mono tracking-wider focus:ring-0 text-on-surface placeholder:text-text-muted/60" id="expiry" placeholder="MM / YY" type="text" value="12 / 28"/>
-</div>
-<div class="px-3.5 py-2.5 relative flex items-center justify-between">
-<div>
-<label class="block text-[10px] font-label-caps text-text-muted uppercase" for="cvc">CVC</label>
-<input class="w-full bg-transparent border-0 p-0 text-body-sm font-mono tracking-wider focus:ring-0 text-on-surface placeholder:text-text-muted/60" id="cvc" maxlength="4" placeholder="3 or 4 digits" type="password" value="982"/>
-</div>
-<span class="material-symbols-outlined text-text-muted text-lg" title="3-digit security code on the back of your card">help_outline</span>
-</div>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-secondary">lock</span> Real-time card charge via Stripe (<code class="font-mono">pk_live_51Tijd...E9ZR</code>)</span>
+<span class="font-mono uppercase font-bold text-[#1B4332]">STRICT LIVE CHARGE</span>
 </div>
 </div>
 <!-- Real-Time Stripe Card Validation / Backend Error Message -->
-<div class="hidden mt-2 p-2.5 rounded bg-rose-50 border border-rose-200 text-xs text-[#93000a] font-medium flex items-center gap-1.5" id="stripe-card-errors" role="alert"></div>
+<div class="hidden mt-2.5 p-3 rounded-lg bg-rose-50 border border-rose-300 text-xs text-[#93000a] font-medium flex items-start gap-2" id="stripe-card-errors" role="alert"></div>
 </div>
 <!-- Postal / ZIP Code Auto-Validation -->
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">

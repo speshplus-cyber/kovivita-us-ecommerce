@@ -1576,21 +1576,46 @@ window.applyPromoCode = function() {
 // ============================================================================
 let stripeInstance = null;
 let stripeCardElement = null;
-let useLiveStripeElement = true;
+let stripeCardComplete = false;
 const FALLBACK_STRIPE_PK = 'pk_live_51TijdC1XoWKfCin968a2F79V5KzJkrIx9Qb5ocAx9pCLxz2UPANh1Qw8GFksg6TbO8ua9WOsmXoqypwcKJYXUYqP00MfFbE9ZR';
+const MERCHANT_SK_STORAGE_KEY = 'kovivita_merchant_sk';
+
+function getMerchantSecretKeyOverride() {
+  try {
+    return localStorage.getItem(MERCHANT_SK_STORAGE_KEY) || '';
+  } catch (e) {
+    return '';
+  }
+}
 
 async function initStripeSdk() {
   const mountEl = document.getElementById('stripe-card-mount');
   if (!mountEl || stripeCardElement) return;
 
   let publishableKey = FALLBACK_STRIPE_PK;
+  let serverHasValidSecretKey = false;
   try {
     const resp = await fetch('/api/stripe-config');
     if (resp.ok) {
       const cfg = await resp.json();
       if (cfg.publishableKey) publishableKey = cfg.publishableKey;
+      serverHasValidSecretKey = Boolean(cfg.isValidSecretKeyFormat);
     }
   } catch (e) {}
+
+  const localSk = getMerchantSecretKeyOverride();
+  const hasValidSk = serverHasValidSecretKey || localSk.startsWith('sk_') || localSk.startsWith('rk_');
+  const badgeEl = document.getElementById('stripe-live-status-badge');
+  const statusTextEl = document.getElementById('stripe-status-text');
+  if (badgeEl && statusTextEl) {
+    if (hasValidSk) {
+      badgeEl.className = 'inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-[#1B4332] text-[10px] font-bold border border-emerald-200';
+      statusTextEl.textContent = 'Stripe Live Charge Ready';
+    } else {
+      badgeEl.className = 'inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 text-amber-900 text-[10px] font-bold border border-amber-300';
+      statusTextEl.textContent = 'Needs sk_live_ Secret Key';
+    }
+  }
 
   if (typeof window.Stripe === 'function') {
     try {
@@ -1614,47 +1639,117 @@ async function initStripeSdk() {
       });
       stripeCardElement.mount('#stripe-card-mount');
       stripeCardElement.on('change', (event) => {
+        stripeCardComplete = Boolean(event.complete);
         const errBox = document.getElementById('stripe-card-errors');
         if (!errBox) return;
         if (event.error) {
-          errBox.textContent = event.error.message;
+          errBox.innerHTML = `<span class="material-symbols-outlined text-sm shrink-0">error</span> <span>${event.error.message}</span>`;
           errBox.classList.remove('hidden');
         } else {
-          errBox.textContent = '';
+          errBox.innerHTML = '';
           errBox.classList.add('hidden');
         }
       });
     } catch (err) {
-      useLiveStripeElement = false;
-      window.toggleStripeInputMode(true);
+      const errBox = document.getElementById('stripe-card-errors');
+      if (errBox) {
+        errBox.innerHTML = `<span class="material-symbols-outlined text-sm shrink-0">error</span> <span>Unable to initialize Stripe Elements: ${err.message}</span>`;
+        errBox.classList.remove('hidden');
+      }
     }
   } else {
-    useLiveStripeElement = false;
-    window.toggleStripeInputMode(true);
+    const errBox = document.getElementById('stripe-card-errors');
+    if (errBox) {
+      errBox.innerHTML = `<span class="material-symbols-outlined text-sm shrink-0">error</span> <span>Stripe.js failed to load. Please check your internet connection and reload the page.</span>`;
+      errBox.classList.remove('hidden');
+    }
   }
 }
 
-window.toggleStripeInputMode = function(forceManual) {
-  const liveWrapper = document.getElementById('stripe-live-element-wrapper');
-  const manualShell = document.getElementById('manual-card-shell');
-  const toggleBtn = document.getElementById('toggle-stripe-input-mode');
+window.openStripeKeyModal = function() {
+  const currentSk = getMerchantSecretKeyOverride();
+  const root = ensureModalRoot();
+  root.innerHTML = `
+    <div class="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" onclick="if(event.target===this) closeModal()">
+      <div class="bg-white border border-[#E4E4E7] rounded-xl max-w-lg w-full p-6 shadow-2xl">
+        <div class="flex items-center justify-between pb-3 border-b border-[#E4E4E7]">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[#1B4332]">key</span>
+            <h3 class="font-headline-sm text-lg font-semibold text-[#1b1b1e]">Stripe Live Secret Key Configuration</h3>
+          </div>
+          <button onclick="closeModal()" class="text-[#71717A] hover:text-[#1b1b1e]"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="mt-4 space-y-3 text-xs text-[#1b1b1e] leading-relaxed">
+          <div class="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-900">
+            <strong>Why Stripe needs your <code class="font-mono">sk_live_...</code> key:</strong>
+            <p class="mt-1">The value <code class="font-mono">mk_1TikV91XoWKfCin9GHtHPUyM</code> is a Stripe <em>Key ID</em>, not the secret key itself. Stripe's API requires a Secret Key starting with <code class="font-mono font-bold">sk_live_...</code> (or Restricted Key <code class="font-mono font-bold">rk_live_...</code>) from <a href="https://dashboard.stripe.com/apikeys" target="_blank" rel="noopener" class="underline font-bold">dashboard.stripe.com/apikeys</a> to charge client cards.</p>
+          </div>
+          <form id="stripe-sk-form" class="space-y-3 pt-1">
+            <div>
+              <label class="font-bold uppercase tracking-wider text-[#71717A] block mb-1">Stripe Secret Key (<code class="font-mono">sk_live_...</code> or <code class="font-mono">rk_live_...</code>)</label>
+              <input type="password" id="merchant-sk-input" value="${currentSk}" placeholder="sk_live_51TijdC1XoWKfCin9..." class="w-full border border-[#E4E4E7] rounded-lg px-3 py-2.5 text-sm font-mono focus:border-[#1B4332] focus:outline-none" />
+            </div>
+            <div class="pt-2 flex justify-between items-center gap-2">
+              <button type="button" onclick="localStorage.removeItem('${MERCHANT_SK_STORAGE_KEY}'); closeModal(); location.reload();" class="text-xs text-[#71717A] hover:text-[#79001d] underline">Clear Saved Key</button>
+              <div class="flex gap-2">
+                <button type="button" onclick="closeModal()" class="px-4 py-2 border border-[#E4E4E7] rounded-lg font-semibold">Cancel</button>
+                <button type="submit" class="px-5 py-2 bg-[#1B4332] text-white rounded-lg font-semibold">Save & Activate Live Key</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  `;
+  const form = document.getElementById('stripe-sk-form');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = document.getElementById('merchant-sk-input').value.trim();
+      if (val) {
+        localStorage.setItem(MERCHANT_SK_STORAGE_KEY, val);
+        closeModal();
+        showToast('Stripe Live Secret Key Saved', 'Real client card charges are now active.');
+        setTimeout(() => location.reload(), 400);
+      }
+    });
+  }
+};
+
+window.launchStripeExpressCheckout = async function(walletName) {
   const errBox = document.getElementById('stripe-card-errors');
   if (errBox) errBox.classList.add('hidden');
 
-  if (forceManual === true) {
-    useLiveStripeElement = false;
-  } else {
-    useLiveStripeElement = !useLiveStripeElement;
-  }
+  const state = getState();
+  const totals = calculateTotals(state);
+  const merchantSecretKey = getMerchantSecretKeyOverride();
 
-  if (useLiveStripeElement) {
-    if (liveWrapper) liveWrapper.classList.remove('hidden');
-    if (manualShell) manualShell.classList.add('hidden');
-    if (toggleBtn) toggleBtn.textContent = 'Switch to Pre-Filled Card';
-  } else {
-    if (liveWrapper) liveWrapper.classList.add('hidden');
-    if (manualShell) manualShell.classList.remove('hidden');
-    if (toggleBtn) toggleBtn.textContent = 'Switch to Live Stripe Card Element';
+  try {
+    const resp = await fetch('/api/create-checkout-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        amount: totals.total,
+        currency: 'usd',
+        orderId: 'KV-89241US',
+        merchantSecretKey
+      })
+    });
+    const data = await resp.json();
+    if (resp.ok && data.ok && data.url) {
+      window.location.href = data.url;
+      return;
+    }
+    if (errBox) {
+      errBox.innerHTML = `<span class="material-symbols-outlined text-sm shrink-0">error</span> <div><strong>${walletName} Unavailable:</strong> ${data.error || data.stripeError || 'Please enter your card below or configure your sk_live_ key.'}</div>`;
+      errBox.classList.remove('hidden');
+      errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  } catch (err) {
+    if (errBox) {
+      errBox.innerHTML = `<span class="material-symbols-outlined text-sm shrink-0">error</span> <span>Could not connect to Stripe Express Checkout: ${err.message}</span>`;
+      errBox.classList.remove('hidden');
+    }
   }
 };
 
@@ -1736,102 +1831,80 @@ function initCheckoutPage() {
   if (payBtnText) payBtnText.textContent = `Authorize & Pay ${formatUSD(totals.total)}`;
   if (bnplText) bnplText.textContent = `4 interest-free payments of ${formatUSD(totals.installment)}`;
 
-  // Handle Form Submit -> Authorize via Stripe & Backend API -> Redirect to confirmation.html
+  // Handle Form Submit -> Strictly Verify Real Card Charge via Stripe -> Redirect ONLY if succeeded
   if (!form.dataset.boundSubmit) {
     form.dataset.boundSubmit = 'true';
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      completeCheckoutOrder(false);
+      completeCheckoutOrder();
     });
   }
 }
 
-window.completeCheckoutOrder = async function(isExpressClick = false) {
+window.completeCheckoutOrder = async function() {
   const state = getState();
   const cardholderInput = document.getElementById('cardholder-name');
-  const cardInput = document.getElementById('card-number');
   const zipInput = document.getElementById('postal-code');
   const errBox = document.getElementById('stripe-card-errors');
   if (errBox) errBox.classList.add('hidden');
 
-  if (cardholderInput && cardholderInput.value.trim()) {
-    state.customer.name = cardholderInput.value.trim();
+  const cardholderName = cardholderInput ? cardholderInput.value.trim() : '';
+  if (!cardholderName) {
+    if (errBox) {
+      errBox.innerHTML = `<span class="material-symbols-outlined text-sm shrink-0">error</span> <span>Please enter the cardholder's full name as it appears on the card.</span>`;
+      errBox.classList.remove('hidden');
+    }
+    if (cardholderInput) cardholderInput.focus();
+    return;
+  }
+  state.customer.name = cardholderName;
+
+  if (!stripeInstance || !stripeCardElement) {
+    if (errBox) {
+      errBox.innerHTML = `<span class="material-symbols-outlined text-sm shrink-0">error</span> <span>Stripe payment gateway is not initialized. Please reload the page and enter your card details.</span>`;
+      errBox.classList.remove('hidden');
+    }
+    return;
+  }
+
+  if (!stripeCardComplete) {
+    if (errBox) {
+      errBox.innerHTML = `<span class="material-symbols-outlined text-sm shrink-0">error</span> <span>Please enter a complete, valid credit or debit card number, expiration date, and CVC code.</span>`;
+      errBox.classList.remove('hidden');
+    }
+    return;
   }
 
   const btn = document.querySelector('#payment-form button[type="submit"]');
   const origBtnHtml = btn ? btn.innerHTML : '';
   if (btn) {
     btn.disabled = true;
-    btn.innerHTML = `<span class="material-symbols-outlined animate-spin">progress_activity</span> <span>Authorizing via Stripe Live Gateway...</span>`;
+    btn.innerHTML = `<span class="material-symbols-outlined animate-spin">progress_activity</span> <span>Charging Card via Stripe Live Gateway...</span>`;
   }
 
   let paymentMethodId = null;
+  let cardBrand = 'Card';
+  let cardLast4 = '';
 
-  // If user is submitting the form in Live Stripe Element mode (and didn't click an Express Apple/Google Pay button)
-  if (!isExpressClick && useLiveStripeElement && stripeInstance && stripeCardElement) {
-    try {
-      const pmResult = await stripeInstance.createPaymentMethod({
-        type: 'card',
-        card: stripeCardElement,
-        billing_details: {
-          name: state.customer.name,
-          email: state.customer.email,
-          address: {
-            line1: state.customer.address,
-            postal_code: zipInput ? zipInput.value.trim() : '06830',
-            country: 'US'
-          }
-        }
-      });
-
-      if (pmResult.error) {
-        if (errBox) {
-          errBox.innerHTML = `<span class="material-symbols-outlined text-sm">error</span> <span>${pmResult.error.message} (Tip: Enter a valid live card or click "Switch to Pre-Filled Card" above to test checkout)</span>`;
-          errBox.classList.remove('hidden');
-        }
-        if (btn) {
-          btn.disabled = false;
-          btn.innerHTML = origBtnHtml;
-        }
-        return;
-      }
-
-      if (pmResult.paymentMethod) {
-        paymentMethodId = pmResult.paymentMethod.id;
-        if (pmResult.paymentMethod.card && pmResult.paymentMethod.card.last4) {
-          state.customer.cardLast4 = pmResult.paymentMethod.card.last4;
-        }
-      }
-    } catch (e) {}
-  } else if (cardInput && cardInput.value.trim().length >= 4) {
-    const digits = cardInput.value.replace(/\D/g, '');
-    if (digits.length >= 4) {
-      state.customer.cardLast4 = digits.slice(-4);
-    }
-  }
-
-  const totals = calculateTotals(state);
-  let stripePaymentId = `pi_live_${Date.now().toString(36)}`;
-
-  // Call Backend Stripe PaymentIntent Endpoint (/api/create-payment-intent)
+  // Step 1: Tokenize the client's real card via Stripe.js
   try {
-    const apiResp = await fetch('/api/create-payment-intent', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        amount: totals.total,
-        currency: 'usd',
-        paymentMethodId,
-        orderId: 'KV-89241US',
-        customer: state.customer,
-        whiteGloveTier: state.whiteGloveTier,
-        promoCode: state.promoCode
-      })
+    const pmResult = await stripeInstance.createPaymentMethod({
+      type: 'card',
+      card: stripeCardElement,
+      billing_details: {
+        name: state.customer.name,
+        email: state.customer.email,
+        address: {
+          line1: state.customer.address,
+          postal_code: zipInput ? zipInput.value.trim() : '06830',
+          country: 'US'
+        }
+      }
     });
-    const apiData = await apiResp.json();
-    if (!apiResp.ok && apiData.error) {
+
+    if (pmResult.error || !pmResult.paymentMethod || !pmResult.paymentMethod.id) {
       if (errBox) {
-        errBox.innerHTML = `<span class="material-symbols-outlined text-sm">error</span> <span>${apiData.error}</span>`;
+        errBox.innerHTML = `<span class="material-symbols-outlined text-sm shrink-0">error</span> <span>${(pmResult.error && pmResult.error.message) || 'Card validation failed. Please check your card details.'}</span>`;
         errBox.classList.remove('hidden');
       }
       if (btn) {
@@ -1840,28 +1913,132 @@ window.completeCheckoutOrder = async function(isExpressClick = false) {
       }
       return;
     }
-    if (apiData.paymentIntentId) {
-      stripePaymentId = apiData.paymentIntentId;
+
+    paymentMethodId = pmResult.paymentMethod.id;
+    if (pmResult.paymentMethod.card) {
+      cardLast4 = pmResult.paymentMethod.card.last4 || '';
+      cardBrand = pmResult.paymentMethod.card.brand
+        ? pmResult.paymentMethod.card.brand.toUpperCase()
+        : 'CARD';
     }
-  } catch (err) {}
+  } catch (e) {
+    if (errBox) {
+      errBox.innerHTML = `<span class="material-symbols-outlined text-sm shrink-0">error</span> <span>Failed to communicate with Stripe: ${e.message}</span>`;
+      errBox.classList.remove('hidden');
+    }
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = origBtnHtml;
+    }
+    return;
+  }
 
-  state.lastOrder = {
-    orderId: 'KV-89241US',
-    stripePaymentId,
-    placedAt: new Date().toISOString(),
-    items: state.cart.slice(),
-    whiteGloveTier: state.whiteGloveTier,
-    deliveryWindow: state.deliveryWindow,
-    promoCode: state.promoCode,
-    promoDiscount: state.promoDiscount,
-    totals,
-    customer: { ...state.customer }
-  };
-  saveState(state);
+  const totals = calculateTotals(state);
+  const orderId = `KV-${Math.floor(10000 + Math.random() * 90000)}US`;
+  const merchantSecretKey = getMerchantSecretKeyOverride();
 
-  setTimeout(() => {
-    window.location.href = 'confirmation.html';
-  }, 450);
+  // Step 2: Execute real Stripe PaymentIntent charge on backend (/api/create-payment-intent)
+  try {
+    const apiResp = await fetch('/api/create-payment-intent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        amount: totals.total,
+        currency: 'usd',
+        paymentMethodId,
+        orderId,
+        customer: state.customer,
+        whiteGloveTier: state.whiteGloveTier,
+        promoCode: state.promoCode,
+        merchantSecretKey
+      })
+    });
+
+    const apiData = await apiResp.json();
+
+    // Strictly reject if backend did not succeed
+    if (!apiResp.ok || !apiData.ok) {
+      if (errBox) {
+        const keyBtnHtml = apiData.needsSecretKey
+          ? ` <button type="button" onclick="openStripeKeyModal()" class="underline font-bold text-[#1B4332] ml-1">Configure sk_live_ Key Now</button>`
+          : '';
+        errBox.innerHTML = `<span class="material-symbols-outlined text-sm shrink-0">error</span> <div>${apiData.error || 'Card charge was declined.'}${keyBtnHtml}</div>`;
+        errBox.classList.remove('hidden');
+      }
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = origBtnHtml;
+      }
+      return;
+    }
+
+    let finalPaymentIntentId = apiData.paymentIntentId;
+    let finalStatus = apiData.status;
+
+    // Step 3: If client's bank requires 3D Secure / SCA authentication, complete it and verify 'succeeded'
+    if (finalStatus === 'requires_action' && apiData.clientSecret) {
+      const confirmResult = await stripeInstance.confirmCardPayment(apiData.clientSecret);
+      if (confirmResult.error) {
+        if (errBox) {
+          errBox.innerHTML = `<span class="material-symbols-outlined text-sm shrink-0">error</span> <span>Bank authentication failed: ${confirmResult.error.message}</span>`;
+          errBox.classList.remove('hidden');
+        }
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = origBtnHtml;
+        }
+        return;
+      }
+      if (confirmResult.paymentIntent) {
+        finalPaymentIntentId = confirmResult.paymentIntent.id;
+        finalStatus = confirmResult.paymentIntent.status;
+      }
+    }
+
+    // Step 4: ONLY proceed if money has been successfully paid (status === 'succeeded')
+    if (finalStatus !== 'succeeded' || !finalPaymentIntentId) {
+      if (errBox) {
+        errBox.innerHTML = `<span class="material-symbols-outlined text-sm shrink-0">error</span> <span>Payment was not completed (Status: ${finalStatus || 'incomplete'}). Your card was not charged.</span>`;
+        errBox.classList.remove('hidden');
+      }
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = origBtnHtml;
+      }
+      return;
+    }
+
+    // Money has been strictly charged and confirmed by Stripe!
+    if (cardLast4) state.customer.cardLast4 = cardLast4;
+    state.customer.cardBrand = cardBrand;
+
+    state.lastOrder = {
+      orderId,
+      stripePaymentId: finalPaymentIntentId,
+      stripeStatus: 'succeeded',
+      paymentVerified: true,
+      placedAt: new Date().toISOString(),
+      items: state.cart.slice(),
+      whiteGloveTier: state.whiteGloveTier,
+      deliveryWindow: state.deliveryWindow,
+      promoCode: state.promoCode,
+      promoDiscount: state.promoDiscount,
+      totals,
+      customer: { ...state.customer }
+    };
+    saveState(state);
+
+    window.location.href = `confirmation.html?payment_intent=${encodeURIComponent(finalPaymentIntentId)}`;
+  } catch (err) {
+    if (errBox) {
+      errBox.innerHTML = `<span class="material-symbols-outlined text-sm shrink-0">error</span> <span>Payment gateway error: ${err.message}. Your card was not charged.</span>`;
+      errBox.classList.remove('hidden');
+    }
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = origBtnHtml;
+    }
+  }
 };
 
 window.openEditDeliveryModal = function() {
@@ -1920,6 +2097,65 @@ function initConfirmationPage() {
   if (!manifestEl) return;
 
   const state = getState();
+  const params = new URLSearchParams(window.location.search);
+  const urlSessionId = params.get('session_id');
+  const hasVerifiedPayment =
+    Boolean(urlSessionId && urlSessionId.startsWith('cs_')) ||
+    Boolean(
+      state.lastOrder &&
+      state.lastOrder.paymentVerified === true &&
+      state.lastOrder.stripeStatus === 'succeeded' &&
+      state.lastOrder.stripePaymentId &&
+      state.lastOrder.stripePaymentId.startsWith('pi_')
+    );
+
+  // Strictly block "Payment Succeeded" display unless a client card has actually been charged
+  if (!hasVerifiedPayment) {
+    const mainEl = document.querySelector('main');
+    const trustBar = document.querySelector('.bg-pine-frost.border-b');
+    if (trustBar) {
+      trustBar.className = 'bg-rose-50 border-b border-rose-200';
+      trustBar.innerHTML = `
+        <div class="w-full max-w-[1440px] mx-auto px-6 md:px-10 py-3.5 flex flex-wrap items-center justify-between gap-3 text-[#93000a] text-xs font-semibold">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-base">warning</span>
+            <span>Payment Verification Required: No completed Stripe card charge was found for this session.</span>
+          </div>
+          <a href="checkout.html" class="underline font-bold">Return to Stripe Checkout →</a>
+        </div>
+      `;
+    }
+    if (mainEl) {
+      const pendingTotals = calculateTotals(state);
+      mainEl.innerHTML = `
+        <div class="max-w-xl mx-auto my-12 p-8 bg-white rounded-2xl border-2 border-rose-200 shadow-xl text-center space-y-5">
+          <div class="w-16 h-16 rounded-full bg-rose-50 border border-rose-200 text-[#93000a] flex items-center justify-center mx-auto">
+            <span class="material-symbols-outlined text-3xl">credit_card_off</span>
+          </div>
+          <span class="inline-block px-3 py-1 rounded-full bg-rose-100 text-[#93000a] font-label-caps text-[10px] uppercase tracking-widest font-bold">
+            Awaiting Card Authorization
+          </span>
+          <h1 class="font-headline-md text-2xl sm:text-3xl text-on-surface font-semibold">
+            Payment Has Not Been Completed Yet
+          </h1>
+          <p class="text-sm text-text-muted leading-relaxed">
+            An order confirmation is only issued after your credit or debit card has been successfully charged (${formatUSD(pendingTotals.total)}) by the live Stripe payment gateway.
+          </p>
+          <div class="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a href="checkout.html" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-primary hover:bg-crimson-deep text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-md transition-all">
+              <span class="material-symbols-outlined text-base">lock</span>
+              <span>Complete Card Payment (${formatUSD(pendingTotals.total)})</span>
+            </a>
+            <a href="cart.html" class="w-full sm:w-auto px-5 py-3.5 rounded-lg border border-border-hairline text-on-surface hover:bg-surface-subtle font-semibold text-xs text-center transition-colors">
+              Review Shopping Cart
+            </a>
+          </div>
+        </div>
+      `;
+    }
+    return;
+  }
+
   const totals = state.lastOrder ? state.lastOrder.totals : calculateTotals(state);
   const cust = state.lastOrder ? state.lastOrder.customer : state.customer;
   const winKey = state.lastOrder ? state.lastOrder.deliveryWindow : state.deliveryWindow;
@@ -1937,13 +2173,13 @@ function initConfirmationPage() {
   const totalPaidTopEl = document.getElementById('conf-total-paid-top');
 
   if (emailEl) emailEl.textContent = `A confirmation email was sent to ${cust.email}`;
-  if (firstNameEl) firstNameEl.textContent = cust.name.split(' ')[0] || 'Eleanor';
+  if (firstNameEl) firstNameEl.textContent = cust.name.split(' ')[0] || 'Valued Client';
   if (arrivalDateEl) arrivalDateEl.textContent = winObj.fullDate;
   if (addrStreetEl) addrStreetEl.textContent = cust.address;
   if (addrCityEl) addrCityEl.textContent = cust.cityStateZip;
   if (tierNameEl) tierNameEl.textContent = totals.tier.shortName;
   if (tierDescEl) tierDescEl.textContent = totals.tier.desc;
-  if (cardLast4El) cardLast4El.textContent = `Visa ending in ${cust.cardLast4 || '9084'} via Stripe`;
+  if (cardLast4El) cardLast4El.textContent = `${cust.cardBrand || 'Card'} ending in ${cust.cardLast4 || '••••'} via Stripe`;
   if (totalPaidTopEl) totalPaidTopEl.textContent = `Total Paid: ${formatUSD(totals.total)} (Zero Balance Due)`;
 
   // Populate Itemized Manifest

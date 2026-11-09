@@ -6,6 +6,11 @@ const DEFAULT_MK = ['mk_1TikV91XoWKfC', 'in9GHtHPUyM'].join('');
 module.exports = async function handler(req, res) {
   const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY || DEFAULT_PK;
   const secretKey = process.env.STRIPE_SECRET_KEY || DEFAULT_MK;
+  const isValidSecretKeyFormat =
+    secretKey.startsWith('sk_live_') ||
+    secretKey.startsWith('rk_live_') ||
+    secretKey.startsWith('sk_test_') ||
+    secretKey.startsWith('rk_test_');
 
   const payload = JSON.stringify({
     ok: true,
@@ -13,6 +18,7 @@ module.exports = async function handler(req, res) {
     mode: publishableKey.startsWith('pk_live_') ? 'live' : 'test',
     accountConnected: Boolean(secretKey && publishableKey),
     secretKeyConfigured: Boolean(secretKey),
+    isValidSecretKeyFormat,
     secretKeyPrefix: secretKey ? `${secretKey.slice(0, 10)}...` : null
   });
 

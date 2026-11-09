@@ -77,10 +77,12 @@ module.exports = async function handler(req, res) {
     return sendJson(res, 405, { ok: false, error: 'Method Not Allowed' });
   }
 
-  const secretKey = process.env.STRIPE_SECRET_KEY || DEFAULT_MK;
-
   try {
     const body = await parseBody(req);
+    const envKey = process.env.STRIPE_SECRET_KEY || DEFAULT_MK;
+    const overrideKey = typeof body.merchantSecretKey === 'string' ? body.merchantSecretKey.trim() : '';
+    const secretKey = overrideKey || envKey;
+
     const amountDollars = Number(body.amount) || 515.5;
     const amountCents = Math.max(50, Math.round(amountDollars * 100));
     const currency = (body.currency || 'usd').toLowerCase();
@@ -90,9 +92,19 @@ module.exports = async function handler(req, res) {
     const host = (req.headers && req.headers.host) || 'kovivita-us-ecommerce.vercel.app';
     const proto = (req.headers && req.headers['x-forwarded-proto']) || 'https';
 
+    if (!paymentMethodId) {
+      return sendJson(res, 400, {
+        ok: false,
+        error: 'A valid credit or debit card is required to authorize payment.'
+      });
+    }
+
     const stripeParams = {
       amount: amountCents,
       currency,
+      payment_method: paymentMethodId,
+      confirm: 'true',
+      return_url: `${proto}://${host}/confirmation.html`,
       description: `Kovivita US Holiday Order ${orderId} (${customer.name || 'Guest'})`,
       'metadata[order_id]': orderId,
       'metadata[customer_name]': customer.name || '',
@@ -101,15 +113,16 @@ module.exports = async function handler(req, res) {
       'metadata[white_glove_tier]': body.whiteGloveTier || 'concierge'
     };
 
-    if (paymentMethodId) {
-      stripeParams.payment_method = paymentMethodId;
-      stripeParams.confirm = 'true';
-      stripeParams.return_url = `${proto}://${host}/confirmation.html`;
-    }
-
     const stripeResp = await stripeApiRequest('/v1/payment_intents', 'POST', stripeParams, secretKey);
 
-    if (stripeResp.statusCode >= 200 && stripeResp.statusCode < 300 && stripeResp.data && stripeResp.data.id) {
+    // Strictly verify that Stripe created a real PaymentIntent
+    if (
+      stripeResp.statusCode >= 200 &&
+      stripeResp.statusCode < 300 &&
+      stripeResp.data &&
+      stripeResp.data.id &&
+      (stripeResp.data.status === 'succeeded' || stripeResp.data.status === 'requires_action')
+    ) {
       return sendJson(res, 200, {
         ok: true,
         mode: 'live_api',
@@ -122,31 +135,20 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    if (stripeResp.data && stripeResp.data.error && stripeResp.data.error.type === 'card_error') {
-      return sendJson(res, 402, {
-        ok: false,
-        error: stripeResp.data.error.message || 'Your card was declined by Stripe.',
-        code: stripeResp.data.error.code
-      });
+    // If Stripe returned an error (card declined, insufficient funds, expired card, or invalid API key mk_...)
+    const stripeErr = (stripeResp.data && stripeResp.data.error) || {};
+    let errMsg = stripeErr.message || 'Payment could not be completed by your card issuer.';
+
+    if (secretKey.startsWith('mk_')) {
+      errMsg =
+        'Stripe Live Charge Blocked: The configured key (mk_1TikV91XoWKfCin9GHtHPUyM) is a Stripe Key ID, not the Secret Key. To charge real cards, click "API Key Settings" above (or update STRIPE_SECRET_KEY in Vercel) with your revealed Secret Key starting with sk_live_ or rk_live_ from https://dashboard.stripe.com/apikeys.';
     }
 
-    const fallbackTxId = paymentMethodId
-      ? `pi_live_${paymentMethodId.replace(/^pm_/, '')}`
-      : `pi_live_${secretKey.replace(/^mk_/, '')}_${Date.now().toString(36)}`;
-
-    return sendJson(res, 200, {
-      ok: true,
-      mode: 'stripe_tokenized',
-      paymentIntentId: fallbackTxId,
-      paymentMethodId: paymentMethodId || null,
-      status: 'succeeded',
-      amount: amountDollars,
-      currency: currency.toUpperCase(),
-      orderId,
-      stripeNote:
-        stripeResp.data && stripeResp.data.error
-          ? stripeResp.data.error.message
-          : 'Authorized via Stripe Live Key'
+    return sendJson(res, 402, {
+      ok: false,
+      error: errMsg,
+      code: stripeErr.code || stripeErr.type || 'payment_failed',
+      needsSecretKey: secretKey.startsWith('mk_')
     });
   } catch (err) {
     console.error('Error creating Stripe PaymentIntent:', err);
